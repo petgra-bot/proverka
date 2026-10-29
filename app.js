@@ -1,7 +1,7 @@
 // Prověrka nemovitosti – krok 1: identifikace z adresy nebo odkazu na inzerát.
 // Adresy a budovy z veřejných služeb RÚIAN (ČÚZK); inzeráty čte malý skript na Cloudflaru (worker/inzerat.js).
 const WORKER_URL = new URLSearchParams(location.search).get("worker")  // pro testování
-  || "";  // např. https://proverka-inzerat.<účet>.workers.dev – doplní se po nasazení
+  || "https://proverka-inzerat.p-gratzer.workers.dev/";
 const RUIAN = "https://ags.cuzk.gov.cz/arcgis/rest/services/RUIAN";
 const GEOKODER = `${RUIAN}/Vyhledavaci_sluzba_nad_daty_RUIAN/MapServer/exts/GeocodeSOE/findAddressCandidates`;
 const PROHLIZECI = `${RUIAN}/Prohlizeci_sluzba_nad_daty_RUIAN/MapServer`;
