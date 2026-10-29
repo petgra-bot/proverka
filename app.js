@@ -135,10 +135,15 @@ async function najdiBudovuZInzeratu(inz) {
   }
   // 4) Jen ulice a část obce (iDNES): budovy v ulici, které sedí typem a počtem podlaží.
   if (inz.ulice) {
-    const kand = await geokoduj(`${inz.ulice}, ${inz.cast_obce || inz.mestska_cast || inz.obec || ""}`, 50);
-    const adresy = kand.filter((c) => c.attributes.Type === "AdresniMisto" && naUlici(c.address, inz.ulice))
+    let kand = [];
+    for (const kde of [inz.cast_obce, inz.obec, ""]) {  // „Praha 12“ geokodér nezná, proto zkoušíme postupně obecněji
+      kand = (await geokoduj(`${inz.ulice}${kde ? ", " + kde : ""}`, 50)).filter((c) => c.attributes.Type === "AdresniMisto");
+      if (kand.length) break;
+    }
+    const adresy = kand.filter((c) => naUlici(c.address, inz.ulice))
       .map((c) => ({ adresa: c.address, lat: c.location.y, lon: c.location.x }));
     const sKody = await Promise.all(adresy.slice(0, 40).map(async (a) => (await adresyUBodu(a.lat, a.lon, 1))[0]).map((p) => p.catch(() => null)));
+    sKody.forEach((a) => { if (a) a.vzdalenost = null; });  // bez bodu v inzerátu vzdálenost nedává smysl
     const vybrane = await vyberBudovu(sKody.filter(Boolean), inz, () => 0);
     if (vybrane.jedna) return { adresa: vybrane.jedna, jak: "jediná budova v ulici, která sedí typem a počtem podlaží", jistota: "střední" };
     if (vybrane.kandidati.length) return { kandidati: vybrane.kandidati, duvod: `Inzerát neuvádí číslo domu. V ulici ${inz.ulice} odpovídají tyto domy:` };
@@ -233,7 +238,7 @@ function lokalitaZOdkazu(u) {
   if (u.hostname.endsWith("sreality.cz") && cesta[0] === "detail")
     return { typ: cesta[2], dispozice: cesta[3] !== "rodinny" ? cesta[3] : null, lokalita: (cesta[4] || "").replace(/-/g, " ") };
   if (u.hostname.endsWith("idnes.cz") && cesta[0] === "detail")  // /detail/prodej/byt/praha-6-lindleyova/<id>/
-    return { typ: cesta[2], dispozice: null, lokalita: (cesta[3] || "").replace(/-/g, " ") };
+    return { typ: cesta[2], dispozice: null, lokalita: (cesta[3] || "").replace(/-/g, " ").replace(/^praha \d+ /, "praha ") };
   return null;
 }
 
