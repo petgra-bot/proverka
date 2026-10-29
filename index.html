@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Prověrka nemovitosti – test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Prověrka nemovitosti</h1>
+      <p class="tlumene">Testovací verze. Zatím jen první krok: ověříme, o jakou nemovitost jde.</p>
+    </header>
+
+    <form id="formular" autocomplete="off">
+      <label for="vstup">Adresa nebo odkaz na inzerát</label>
+      <input id="vstup" name="vstup" type="text" required
+             placeholder="např. Karlická 49, Radotín  nebo  https://www.sreality.cz/detail/…">
+      <details>
+        <summary>Byt: číslo jednotky a podlaží (nepovinné)</summary>
+        <div class="dvojice">
+          <label>Číslo jednotky<input id="jednotka" type="text" placeholder="např. 3190/1"></label>
+          <label>Podlaží<input id="patro" type="text" placeholder="např. 3"></label>
+        </div>
+      </details>
+      <button type="submit">Ověřit nemovitost</button>
+    </form>
+
+    <section id="vysledek" aria-live="polite"></section>
+
+    <footer class="tlumene">
+      Data: RÚIAN (ČÚZK). Stránka nic neukládá. Nejde o právní ani znalecký posudek.
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
