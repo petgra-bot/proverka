@@ -16,15 +16,9 @@
 
     <form id="formular" autocomplete="off">
       <label for="vstup">Adresa nebo odkaz na inzerát</label>
-      <input id="vstup" name="vstup" type="text" required
-             placeholder="např. Karlická 49, Radotín  nebo  https://www.sreality.cz/detail/…">
-      <details>
-        <summary>Byt: číslo jednotky a podlaží (nepovinné)</summary>
-        <div class="dvojice">
-          <label>Číslo jednotky<input id="jednotka" type="text" placeholder="např. 3190/1"></label>
-          <label>Podlaží<input id="patro" type="text" placeholder="např. 3"></label>
-        </div>
-      </details>
+      <input id="vstup" name="vstup" type="text" required list="navrhy"
+             placeholder="např. Karlická 49, Radotín  nebo odkaz ze Sreality, Bezrealitek či iDNES">
+      <datalist id="navrhy"></datalist>
       <button type="submit">Ověřit nemovitost</button>
     </form>
 
