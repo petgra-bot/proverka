@@ -37,6 +37,13 @@ dt { color: var(--tlumene); } dd { margin: 0; }
 ul.kandidati { list-style: none; padding: 0; margin: 8px 0 0; }
 ul.kandidati button { margin: 4px 0; width: 100%; text-align: left; color: var(--text); background: var(--pozadi);
   border: 1px solid var(--linka); font-weight: 400; }
+a.zalozka { display: inline-block; padding: 8px 16px; border: 2px dashed var(--firma); border-radius: 8px;
+  color: var(--firma); font-weight: 600; text-decoration: none; cursor: grab; }
+#zalozka-info { background: var(--karta); border: 1px solid var(--linka); border-radius: 10px; padding: 12px 20px; margin: 0 0 20px; }
+#zalozka-info p { margin: 8px 0; }
+.alternativy { margin-top: 10px; }
+.alternativy button { margin: 2px 6px 2px 0; padding: 4px 10px; font-weight: 400; color: var(--text); background: var(--pozadi);
+  border: 1px solid var(--linka); }
 .poznamka { background: var(--oranzova-bg); border-radius: 8px; padding: 8px 12px; margin-top: 10px; }
 footer { margin-top: 32px; }
 @media (max-width: 520px) { .dvojice, dl { grid-template-columns: 1fr; } dt { margin-top: 6px; } }

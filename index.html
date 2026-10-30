@@ -16,11 +16,18 @@
 
     <form id="formular" autocomplete="off">
       <label for="vstup">Adresa nebo odkaz na inzerát</label>
-      <input id="vstup" name="vstup" type="text" required list="navrhy"
+      <input id="vstup" name="vstup" type="text" required
              placeholder="např. Karlická 49, Radotín  nebo odkaz ze Sreality, Bezrealitek či iDNES">
-      <datalist id="navrhy"></datalist>
       <button type="submit">Ověřit nemovitost</button>
     </form>
+
+    <details id="zalozka-info">
+      <summary>Inzerát ze Sreality? Přidejte si tlačítko „Prověřit“ do prohlížeče</summary>
+      <p>Sreality nedovolují inzeráty číst automaticky. Tlačítko přečte inzerát, který máte právě otevřený, ve vašem prohlížeči
+        a pošle sem jen údaje potřebné k určení domu (poloha, ulice, plochy, podlaží). Funguje i pro Bezrealitky a iDNES Reality.</p>
+      <p><a id="zalozka" class="zalozka" href="#">Prověřit</a></p>
+      <p class="tlumene">Počítač: přetáhněte tlačítko myší na lištu záložek. Pak na otevřeném inzerátu klikněte na záložku „Prověřit“.</p>
+    </details>
 
     <section id="vysledek" aria-live="polite"></section>
 

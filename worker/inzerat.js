@@ -2,8 +2,9 @@
 // k identifikaci nemovitosti. Nic neukládá kromě krátké cache odpovědi (1 h).
 //   GET /?url=https://www.sreality.cz/detail/...   → JSON
 const POVOLENE_ORIGINY = [/^https:\/\/proverka\.gratzer\.cz$/, /^http:\/\/localhost(:\d+)?$/];
+// Sreality ne: jejich robots.txt zakazuje automatické čtení všem kromě vyhledávačů. Inzeráty ze Sreality čte
+// záložka „Prověřit“ v prohlížeči uživatele (app.js → zalozka).
 const PORTALY = {
-  "sreality.cz": sreality,
   "bezrealitky.cz": bezrealitky,
   "reality.idnes.cz": idnes,
 };
