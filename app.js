@@ -88,7 +88,8 @@ function shodaSInzeratem(b, inz) {
   const { typ } = typBudovy(b);
   if (inz.typ === "byt") body += typ === "bytový dům" ? 2 : -3;
   if (inz.typ === "dum") body += typ === "rodinný dům" ? 2 : -3;
-  if (inz.podlazi_budovy && b.pocetpodlazi) body += Math.abs(inz.podlazi_budovy - b.pocetpodlazi) <= 0 ? 2 : -1;
+  // Počet podlaží v RÚIAN a v inzerátu se často liší (suterén, podkroví): shoda jen přidá, rozdíl neubírá.
+  if (inz.podlazi_budovy && b.pocetpodlazi === inz.podlazi_budovy) body += 1;
   return body;
 }
 
@@ -260,8 +261,6 @@ async function zobrazBudovu(adresa, inz, puvod) {
   if (!/Praha/.test(adresa.adresa)) upozorneni.push("Zatím prověřujeme jen Prahu. Identifikace funguje, další kroky pro tuto obec zatím nejsou.");
   if (inz?.typ === "byt" && typ === "rodinný dům") upozorneni.push("Inzerát nabízí byt, ale na adrese je podle RÚIAN rodinný dům. Ověřte prosím adresu.");
   if (inz?.typ === "dum" && typ === "bytový dům") upozorneni.push("Inzerát nabízí rodinný dům, ale na adrese je podle RÚIAN bytový dům. Ověřte prosím adresu.");
-  if (inz?.podlazi_budovy && b.pocetpodlazi && inz.podlazi_budovy !== b.pocetpodlazi)
-    upozorneni.push(`Inzerát uvádí dům o ${inz.podlazi_budovy} podlažích, RÚIAN ${b.pocetpodlazi}. Drobný rozdíl bývá (počítání suterénu), větší je důvod adresu ověřit.`);
   if (typ === "jiná stavba") upozorneni.push(`Budova je v RÚIAN vedená jako „${zpusob}“. Prověrka zatím umí byty a rodinné domy.`);
 
   const rok = b.dokonceni ? new Date(b.dokonceni).getFullYear() : null;
@@ -305,7 +304,8 @@ function chyba(err) {
   $("vysledek").innerHTML = karta("chyba", "Něco se nepovedlo", `<p>${esc(err.message)}. Zkuste to prosím znovu, případně zadejte adresu.</p>`);
 }
 
-const TIP_ZALOZKA = `Dům určíme hned, když inzerát otevřete a kliknete na záložku <b>Prověřit</b> (návod pod polem pro adresu).`;
+const TIP_ZALOZKA = `Dům určíme hned, když inzerát otevřete a klepnete na záložku <b>Prověřit</b>.
+  <a href="#zalozka-info" class="otevri-navod">Jak si záložku přidat</a>.`;
 
 // Odkaz na portál bez skriptu na Cloudflaru: aspoň typ a ulice z adresy odkazu.
 function lokalitaZOdkazu(u) {
@@ -399,7 +399,7 @@ function zalozka() {
   const host = location.hostname.replace(/^www\./, "");
   const cislo = (s) => { const m = String(s ?? "").replace(/\s/g, "").match(/\d+/); return m ? +m[0] : null; };
   const nextData = (html) => { const m = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/); return m ? JSON.parse(m[1]) : null; };
-  const posli = (d) => window.open(CIL + "#inzerat=" + encodeURIComponent(JSON.stringify({ ...d, portal: host, url: location.origin + location.pathname })), "_blank");
+  const posli = (d) => { location.href = CIL + "#inzerat=" + encodeURIComponent(JSON.stringify({ ...d, portal: host, url: location.origin + location.pathname })); };
   (async () => {
     if (host.endsWith("sreality.cz")) {
       const id = location.pathname.match(/(\d+)\/?$/)?.[1];
@@ -450,8 +450,19 @@ function zalozka() {
   })().catch((e) => alert("Prověřit: inzerát se nepodařilo přečíst (" + e.message + ")."));
 }
 
-$("zalozka").href = "javascript:" + encodeURIComponent(`(${zalozka.toString()})()`);
+const KOD_ZALOZKY = "javascript:" + encodeURIComponent(`(${zalozka.toString()})()`);
+$("zalozka").href = KOD_ZALOZKY;
 $("zalozka").addEventListener("click", (e) => { e.preventDefault(); alert("Tlačítko přetáhněte na lištu záložek. Klikněte na něj až na stránce inzerátu."); });
+$("kopirovat").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText(KOD_ZALOZKY); $("kopirovat").textContent = "Zkopírováno ✓"; }
+  catch { prompt("Zkopírujte tento text:", KOD_ZALOZKY); }
+});
+document.addEventListener("click", (e) => {
+  if (!e.target.closest?.(".otevri-navod")) return;
+  e.preventDefault();
+  $("zalozka-info").open = true;
+  $("zalozka-info").scrollIntoView({ behavior: "smooth" });
+});
 
 $("formular").addEventListener("submit", overit);
 
