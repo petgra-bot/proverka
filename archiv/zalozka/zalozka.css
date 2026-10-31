@@ -1,0 +1,6 @@
+/* ARCHIV: styly záložky do style.css */
+a.zalozka { display: inline-block; padding: 8px 16px; border: 2px dashed var(--firma); border-radius: 8px;
+  color: var(--firma); font-weight: 600; text-decoration: none; cursor: grab; }
+#zalozka-info { background: var(--karta); border: 1px solid var(--linka); border-radius: 10px; padding: 12px 20px; margin: 0 0 20px; }
+#zalozka-info p, #zalozka-info li { margin: 8px 0; }
+#kopirovat { margin-top: 0; color: var(--text); background: var(--pozadi); border: 1px solid var(--linka); }

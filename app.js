@@ -231,8 +231,9 @@ async function najdiBudovuZInzeratu(inz) {
   }
   const nejlepsi = poradi.filter((x) => x.skore >= prvni.skore - 1 && x.skore > 0).slice(0, 6);
   const kandidati = nejlepsi.length ? nejlepsi : poradi.slice(0, 6);
-  return { kandidati, duvod: presnyBod ? "Inzerát uvádí jen přibližné místo. Nejlépe odpovídají tyto domy:"
-    : `Inzerát neuvádí číslo domu. ${inz.ulice ? `V ulici ${esc(inz.ulice)} ` : ""}nejlépe odpovídají tyto domy:` };
+  const vsechny = poradi.filter((x) => x.skore > 0);
+  return { kandidati, vsechny: vsechny.length ? vsechny : poradi, duvod: presnyBod ? "Inzerát uvádí jen přibližné místo."
+    : `Inzerát neuvádí číslo domu${inz.ulice ? `, jen ulici ${esc(inz.ulice)}` : ""}.` };
 }
 
 // ---------- Zobrazení ----------
@@ -248,6 +249,78 @@ function nabidni(kandidati, nadpis, uvod, inz) {
     <p class="tlumene">Nebo zadejte přesnou adresu do pole nahoře.</p>`);
   $("vysledek").querySelectorAll("button[data-i]").forEach((btn) => btn.addEventListener("click", () =>
     zobrazBudovu(kandidati[+btn.dataset.i], inz, { jak: "vybráno z nabídky", jistota: "jistá" }).catch(chyba)));
+}
+
+// ---------- Výběr domu na letecké mapě ----------
+
+let leaflet;
+function nactiLeaflet() {
+  leaflet ??= new Promise((ok, chyba) => {
+    const css = document.createElement("link");
+    css.rel = "stylesheet"; css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+    document.head.append(css);
+    const js = document.createElement("script");
+    js.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+    js.onload = () => ok(window.L); js.onerror = () => chyba(new Error("Mapu se nepodařilo načíst"));
+    document.head.append(js);
+  });
+  return leaflet;
+}
+
+async function obrysyBudov(kody) {
+  const unikatni = [...new Set(kody)].filter(Boolean), obrysy = {};
+  for (let i = 0; i < unikatni.length; i += 100) {
+    const d = await dotaz(`${PROHLIZECI}/3/query`, { where: `kod in (${unikatni.slice(i, i + 100).join(",")})`,
+      outFields: "kod", returnGeometry: true, outSR: 4326 });
+    for (const f of d.features || []) obrysy[f.attributes.kod] = f.geometry.rings.map((r) => r.map(([x, y]) => [y, x]));
+  }
+  return obrysy;
+}
+
+// Domy, které sedí typem, na leteckém snímku; ty nejpravděpodobnější zvýrazněné. Zákazník pozná dům podle fotek z inzerátu.
+async function vyberNaMape(vsechny, kandidati, uvod, inz) {
+  nacitam("Připravuji mapu…");
+  const domy = vsechny.slice(0, 120);
+  const [L, obrysy] = await Promise.all([nactiLeaflet(), obrysyBudov(domy.map((d) => d.so))]);
+  const zvyraznene = new Set(kandidati.length < domy.length ? kandidati.map((k) => k.so) : []);
+  const seznam = kandidati.map((c, i) => `<li><button type="button" data-i="${i}">${esc(c.adresa)}${
+    c.vzdalenost != null ? ` <span class="tlumene">(${c.vzdalenost} m od bodu v inzerátu)</span>` : ""}</button></li>`).join("");
+  $("vysledek").innerHTML = karta("upresnit", "Klepněte na dům z inzerátu", `<p>${uvod} Najděte dům na leteckém snímku
+    podle fotek z inzerátu (střecha, zahrada, okolí) a klepněte na něj.${zvyraznene.size ? " Oranžově jsou domy, které inzerátu odpovídají nejvíc." : ""}</p>
+    <div id="mapa" class="mapa"></div>
+    <div id="vybrany" class="vybrany" hidden><span></span><button type="button">Pokračovat s tímto domem</button></div>
+    ${zvyraznene.size ? `<p class="tlumene">Nejpravděpodobnější domy:</p><ul class="kandidati">${seznam}</ul>` : ""}
+    <p class="tlumene">Adresu vám také sdělí makléř nebo prodávající, stačí ji zadat do pole nahoře.</p>`);
+  $("vysledek").querySelectorAll("button[data-i]").forEach((btn) => btn.addEventListener("click", () =>
+    zobrazBudovu(kandidati[+btn.dataset.i], inz, { jak: "vybráno z nabídky", jistota: "jistá" }).catch(chyba)));
+
+  // Plátno s tolerancí: malé obrysy domů jdou trefit i prstem.
+  const mapa = L.map("mapa", { renderer: L.canvas({ tolerance: 10 }) });
+  mapa.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
+  L.tileLayer("https://ags.cuzk.gov.cz/arcgis1/rest/services/ORTOFOTO_WM/MapServer/tile/{z}/{y}/{x}",
+    { maxZoom: 21, maxNativeZoom: 20, attribution: "Ortofoto © ČÚZK" }).addTo(mapa);
+  const styl = (so, vybrany) => vybrany ? { color: "#2e7d32", weight: 3, fillColor: "#7cc68a", fillOpacity: 0.6 }
+    : zvyraznene.has(so) ? { color: "#f0a050", weight: 3, fillColor: "#f0a050", fillOpacity: 0.45 }
+    : { color: "#ffffff", weight: 2, fillColor: "#ffffff", fillOpacity: 0.15 };
+  let vybranaVrstva = null, vybranyDum = null;
+  const skupina = L.featureGroup().addTo(mapa);
+  for (const d of domy) {
+    if (!obrysy[d.so]) continue;
+    const vrstva = L.polygon(obrysy[d.so], styl(d.so, false)).addTo(skupina);
+    vrstva.bindTooltip(esc(d.adresa.split(",")[0]), { direction: "top" });
+    vrstva.on("click", () => {
+      vybranaVrstva?.setStyle(styl(vybranyDum.so, false));
+      vybranaVrstva = vrstva; vybranyDum = d;
+      vrstva.setStyle(styl(d.so, true));
+      $("vybrany").hidden = false;
+      $("vybrany").querySelector("span").textContent = `Vybraný dům: ${d.adresa.split(",")[0]}`;
+    });
+  }
+  if (inz?.lat && inz.presnost !== "ulice") L.circleMarker([inz.lat, inz.lon], { radius: 6, color: "#f08080" })
+    .bindTooltip("bod z inzerátu").addTo(mapa);
+  if (skupina.getLayers().length) mapa.fitBounds(skupina.getBounds(), { padding: [20, 20], maxZoom: 19 });
+  $("vybrany").querySelector("button").addEventListener("click", () =>
+    zobrazBudovu(vybranyDum, inz, { jak: "vybráno na mapě", jistota: "jistá" }).catch(chyba));
 }
 
 async function zobrazBudovu(adresa, inz, puvod) {
@@ -304,8 +377,7 @@ function chyba(err) {
   $("vysledek").innerHTML = karta("chyba", "Něco se nepovedlo", `<p>${esc(err.message)}. Zkuste to prosím znovu, případně zadejte adresu.</p>`);
 }
 
-const TIP_ZALOZKA = `Dům určíme hned, když inzerát otevřete a klepnete na záložku <b>Prověřit</b>.
-  <a href="#zalozka-info" class="otevri-navod">Jak si záložku přidat</a>.`;
+const BEZ_ULICE = `Z odkazu nejde vyčíst ani ulici. Zadejte prosím adresu nemovitosti, sdělí vám ji makléř nebo prodávající.`;
 
 // Odkaz na portál bez skriptu na Cloudflaru: aspoň typ a ulice z adresy odkazu.
 function lokalitaZOdkazu(u) {
@@ -321,7 +393,7 @@ async function zpracujInzerat(inz) {
   nacitam("Hledám dům v registru adres a katastru…");
   const v = await najdiBudovuZInzeratu(inz);
   if (v.adresa) return zobrazBudovu(v.adresa, inz, v);
-  if (v.kandidati.length) return nabidni(v.kandidati, "Vyberte dům z inzerátu", v.duvod, inz);
+  if (v.kandidati.length) return vyberNaMape(v.vsechny, v.kandidati, v.duvod, inz);
   $("vysledek").innerHTML = karta("upresnit", "Z inzerátu nejde určit dům", `<p>${esc(v.duvod)} Zadejte prosím adresu.</p>`);
 }
 
@@ -347,14 +419,14 @@ async function overitOdkaz(url) {
     const nazev = nazevUlice(ulice);
     const obec = ulice.address.match(/Praha|[^,]+$/)?.[0]?.trim();
     const inzOdkaz = { typ: lok.typ, dispozice: lok.dispozice, ulice: nazev, obec, portal: url.hostname.replace(/^www\./, "") };
-    const adresy = await adresyVUlici(nazev, obec, null);
+    const adresy = await adresyVUlici(nazev, obec, ulice.address.split(",")[1].trim());
     adresy.forEach((a) => { a.vzdalenost = null; });
     const poradi = (await ohodnot(adresy, inzOdkaz)).filter((x) => x.skore > 0);
     if (poradi.length === 1) return zobrazBudovu(poradi[0], inzOdkaz, { jak: "jediný dům v ulici, který sedí typem", jistota: "střední" });
-    if (poradi.length) return nabidni(poradi.slice(0, 8), "Vyberte dům z inzerátu",
-      `Portál nedovoluje inzerát přečíst automaticky, z odkazu známe jen ulici ${esc(nazev)}. ${TIP_ZALOZKA}`, inzOdkaz);
+    if (poradi.length) return vyberNaMape(poradi, [],
+      `Portál nedovoluje inzerát přečíst automaticky, z odkazu známe jen ulici ${esc(nazev)}.`, inzOdkaz);
   }
-  $("vysledek").innerHTML = karta("upresnit", "Z odkazu nejde vyčíst adresu", `<p>${TIP_ZALOZKA} Nebo zadejte adresu.</p>`);
+  $("vysledek").innerHTML = karta("upresnit", "Z odkazu nejde vyčíst adresu", `<p>${BEZ_ULICE}</p>`);
 }
 
 async function overit(e) {
@@ -390,88 +462,4 @@ async function overit(e) {
   }
 }
 
-// ---------- Záložka „Prověřit“ ----------
-// Běží na stránce inzerátu v prohlížeči uživatele (ne na našem serveru): přečte otevřený inzerát
-// a otevře tuto stránku s údaji v části adresy za # (ta se na server neposílá).
-
-function zalozka() {
-  const CIL = "https://proverka.gratzer.cz/";
-  const host = location.hostname.replace(/^www\./, "");
-  const cislo = (s) => { const m = String(s ?? "").replace(/\s/g, "").match(/\d+/); return m ? +m[0] : null; };
-  const nextData = (html) => { const m = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/); return m ? JSON.parse(m[1]) : null; };
-  const posli = (d) => { location.href = CIL + "#inzerat=" + encodeURIComponent(JSON.stringify({ ...d, portal: host, url: location.origin + location.pathname })); };
-  (async () => {
-    if (host.endsWith("sreality.cz")) {
-      const id = location.pathname.match(/(\d+)\/?$/)?.[1];
-      const najdi = (n) => n?.props?.pageProps?.dehydratedState?.queries
-        ?.find((q) => q.queryKey?.[0] === "estate" && String(q.state?.data?.id) === id)?.state?.data;
-      // Po proklikání z výsledků hledání je v __NEXT_DATA__ jiná stránka; pak ji načteme znovu (jako obnovení stránky).
-      let d = najdi(nextData(document.documentElement.innerHTML));
-      if (!d) d = najdi(nextData(await (await fetch(location.href)).text()));
-      if (!d) return alert("Prověřit: otevřete prosím detail inzerátu.");
-      const l = d.locality || {}, p = d.params || {};
-      return posli({
-        typ: { Byty: "byt", Domy: "dum", Pozemky: "pozemek" }[d.categoryMainCb?.name] || null, dispozice: d.categoryMainCb?.name === "Byty" ? d.categorySubCb?.name || null : null,
-        nazev: d.name, ulice: l.street || null, cislo_popisne: l.houseNumber || null, cislo_orientacni: l.streetNumber || null,
-        presnost: { address: "adresa", gps: "gps", street: "ulice" }[l.inaccuracyType] || l.inaccuracyType || null,
-        lat: l.latitude ?? null, lon: l.longitude ?? null, obec: l.city || null, cast_obce: l.cityPart || l.ward || null,
-        patro: p.floorNumber ?? null, podlazi_budovy: p.floors ?? null, plocha_m2: p.usableArea ?? p.floorArea ?? null,
-        pozemek_m2: p.estateArea ?? cislo(d.name?.match(/pozemek\s+([\d\s]+)/)?.[1]), cena_kc: d.priceCzk ?? null,
-      });
-    }
-    if (host.endsWith("bezrealitky.cz")) {
-      const props = nextData(document.documentElement.innerHTML)?.props?.pageProps || {};
-      const a = props.origAdvert || Object.entries(props.apolloCache || {}).find(([k]) => k.startsWith("Advert:"))?.[1];
-      if (!a) return alert("Prověřit: otevřete prosím detail inzerátu.");
-      return posli({
-        typ: { BYT: "byt", DUM: "dum", POZEMEK: "pozemek" }[a.estateType] || null, nazev: a.imageAltText || null,
-        ulice: a.street || null, cislo_popisne: a.houseNumber || null, ruian_adresa: a.ruianId || null,
-        presnost: a.ruianId ? "ruian" : a.gps ? "gps" : "ulice", lat: a.gps?.lat ?? null, lon: a.gps?.lng ?? null, obec: a.city || null,
-        patro: a.etage ?? null, podlazi_budovy: a.totalFloors ?? null, plocha_m2: a.surface ?? null, pozemek_m2: a.surfaceLand ?? null, cena_kc: a.price ?? null,
-      });
-    }
-    if (host.endsWith("reality.idnes.cz")) {
-      const text = (el) => el?.textContent.replace(/\s+/g, " ").trim() || null;
-      const parametry = {};
-      document.querySelectorAll("dt").forEach((dt) => { parametry[text(dt)] = text(dt.nextElementSibling); });
-      const misto = text(document.querySelector(".b-detail__info")) || "";
-      const [ulice, zbytek] = misto.includes(",") ? misto.split(/,\s*/, 2) : [null, misto];
-      const [mc, cast] = (zbytek || "").split(/\s+-\s+/);
-      const nazev = text(document.querySelector("h1"));
-      return posli({
-        typ: location.pathname.split("/")[3] || null, nazev, dispozice: nazev?.match(/\d\+(?:kk|\d)/)?.[0] || null,
-        ulice, presnost: ulice ? "ulice" : "lokalita", obec: mc?.startsWith("Praha") ? "Praha" : mc || null, cast_obce: cast || null,
-        patro: cislo(parametry["Podlaží"]?.match(/\((\d+)\.\s*NP\)/)?.[1] ?? parametry["Podlaží"]),
-        podlazi_budovy: cislo(parametry["Počet podlaží budovy"]), plocha_m2: cislo(parametry["Užitná plocha"]),
-        pozemek_m2: cislo(parametry["Plocha pozemku"]),
-      });
-    }
-    alert("Prověřit umí inzeráty ze Sreality, Bezrealitek a iDNES Reality.");
-  })().catch((e) => alert("Prověřit: inzerát se nepodařilo přečíst (" + e.message + ")."));
-}
-
-const KOD_ZALOZKY = "javascript:" + encodeURIComponent(`(${zalozka.toString()})()`);
-$("zalozka").href = KOD_ZALOZKY;
-$("zalozka").addEventListener("click", (e) => { e.preventDefault(); alert("Tlačítko přetáhněte na lištu záložek. Klikněte na něj až na stránce inzerátu."); });
-$("kopirovat").addEventListener("click", async () => {
-  try { await navigator.clipboard.writeText(KOD_ZALOZKY); $("kopirovat").textContent = "Zkopírováno ✓"; }
-  catch { prompt("Zkopírujte tento text:", KOD_ZALOZKY); }
-});
-document.addEventListener("click", (e) => {
-  if (!e.target.closest?.(".otevri-navod")) return;
-  e.preventDefault();
-  $("zalozka-info").open = true;
-  $("zalozka-info").scrollIntoView({ behavior: "smooth" });
-});
-
 $("formular").addEventListener("submit", overit);
-
-// Údaje ze záložky „Prověřit“.
-if (location.hash.startsWith("#inzerat=")) {
-  try {
-    const inz = JSON.parse(decodeURIComponent(location.hash.slice(9)));
-    history.replaceState(null, "", location.pathname + location.search);
-    $("vstup").value = inz.url || "";
-    zpracujInzerat(inz).catch(chyba);
-  } catch (err) { chyba(new Error("Údaje ze záložky se nepodařilo přečíst")); }
-}

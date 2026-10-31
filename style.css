@@ -27,7 +27,7 @@ summary { cursor: pointer; color: var(--tlumene); }
 .dvojice label { font-weight: 400; }
 button { margin-top: 16px; padding: 10px 18px; font: inherit; font-weight: 600; color: #fff;
   background: var(--firma); border: 0; border-radius: 8px; cursor: pointer; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) button[type="submit"] { color: #12161b; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) :is(button[type="submit"], .vybrany button) { color: #12161b; } }
 button:disabled { opacity: .6; cursor: wait; }
 .karta { background: var(--karta); border: 1px solid var(--linka); border-left: 5px solid var(--c);
   border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
@@ -38,14 +38,16 @@ dt { color: var(--tlumene); } dd { margin: 0; }
 ul.kandidati { list-style: none; padding: 0; margin: 8px 0 0; }
 ul.kandidati button { margin: 4px 0; width: 100%; text-align: left; color: var(--text); background: var(--pozadi);
   border: 1px solid var(--linka); font-weight: 400; }
-a.zalozka { display: inline-block; padding: 8px 16px; border: 2px dashed var(--firma); border-radius: 8px;
-  color: var(--firma); font-weight: 600; text-decoration: none; cursor: grab; }
-#zalozka-info { background: var(--karta); border: 1px solid var(--linka); border-radius: 10px; padding: 12px 20px; margin: 0 0 20px; }
-#zalozka-info p, #zalozka-info li { margin: 8px 0; }
-#kopirovat { margin-top: 0; color: var(--text); background: var(--pozadi); border: 1px solid var(--linka); }
 .alternativy { margin-top: 10px; }
 .alternativy button { margin: 2px 6px 2px 0; padding: 4px 10px; font-weight: 400; color: var(--text); background: var(--pozadi);
   border: 1px solid var(--linka); }
+.napoveda { margin: 8px 0 0; }
+.mapa { height: 420px; margin: 12px 0; border-radius: 8px; border: 1px solid var(--linka); }
+@media (max-width: 520px) { .mapa { height: 360px; } }
+.vybrany { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 0 0 8px; }
+.vybrany[hidden] { display: none; }
+.vybrany span { font-weight: 600; }
+.vybrany button { margin-top: 0; }
 .poznamka { background: var(--oranzova-bg); border-radius: 8px; padding: 8px 12px; margin-top: 10px; }
 footer { margin-top: 32px; }
 @media (max-width: 520px) { .dvojice, dl { grid-template-columns: 1fr; } dt { margin-top: 6px; } }

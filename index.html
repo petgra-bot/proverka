@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>Prověrka nemovitosti – test</title>
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
   <main>
@@ -15,26 +15,14 @@
     </header>
 
     <form id="formular" autocomplete="off">
-      <label for="vstup">Adresa nebo odkaz na inzerát</label>
+      <label for="vstup">Adresa nemovitosti</label>
       <input id="vstup" name="vstup" type="text" required
-             placeholder="např. Karlická 49, Radotín  nebo odkaz ze Sreality, Bezrealitek či iDNES">
+             placeholder="např. Karlická 49, Radotín">
+      <p class="tlumene napoveda">Adresu vám sdělí makléř nebo prodávající. Nemáte ji? Vložte odkaz na inzerát
+        ze Sreality, Bezrealitek nebo iDNES Reality, dům pak případně vyberete na mapě.</p>
       <button type="submit">Ověřit nemovitost</button>
     </form>
 
-    <details id="zalozka-info">
-      <summary>Inzerát ze Sreality? Přidejte si do prohlížeče záložku „Prověřit“</summary>
-      <p>Sreality nedovolují inzeráty číst automaticky, z odkazu proto známe jen ulici. Záložka „Prověřit“ přečte inzerát,
-        který máte právě otevřený, ve vašem prohlížeči a pošle sem jen údaje potřebné k určení domu (bod na mapě, ulice,
-        plochy, podlaží). Funguje i pro Bezrealitky a iDNES Reality.</p>
-      <p><b>Počítač:</b> přetáhněte tlačítko myší na lištu záložek: <a id="zalozka" class="zalozka" href="#">Prověřit</a></p>
-      <p><b>iPad a iPhone (Safari):</b></p>
-      <ol>
-        <li><button type="button" id="kopirovat">Zkopírovat kód záložky</button></li>
-        <li>Na této stránce klepněte na Sdílet (čtvereček se šipkou) → <i>Přidat záložku</i>, pojmenujte ji „Prověřit“ a uložte.</li>
-        <li>Otevřete Záložky (ikona knížky) → <i>Upravit</i> → klepněte na „Prověřit“, smažte adresu a vložte zkopírovaný kód.</li>
-        <li>Pak na otevřeném inzerátu otevřete Záložky a klepněte na „Prověřit“.</li>
-      </ol>
-    </details>
 
     <section id="vysledek" aria-live="polite"></section>
 
@@ -42,6 +30,6 @@
       Data: RÚIAN (ČÚZK). Stránka nic neukládá. Nejde o právní ani znalecký posudek.
     </footer>
   </main>
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>
