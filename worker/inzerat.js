@@ -119,10 +119,13 @@ function idnes(html, url) {
   const cislo = (s) => { const m = String(s || "").match(/\d+/); return m ? +m[0] : null; };
   const patro = parametry["Podlaží"]?.match(/\((\d+)\.\s*NP\)/)?.[1] ?? cislo(parametry["Podlaží"]);
   const cesta = url.pathname.split("/").filter(Boolean);
+  // Špendlík z mapy je v dataLayer stránky („listing_lat“, „listing_lon“).
+  const souradnice = (k) => { const m = html.match(new RegExp(`"listing_${k}"\\s*:\\s*(-?[\\d.]+)`)); return m ? +m[1] : null; };
+  const lat = souradnice("lat"), lon = souradnice("lon");
   return {
     nazev, typ: cesta[2] || null, dispozice: nazev?.match(/\d\+(?:kk|\d)/)?.[0] || null,
     ulice: ulice || null, cislo_popisne: null, cislo_orientacni: null, ruian_adresa: null,
-    presnost: ulice ? "ulice" : "lokalita", lat: null, lon: null,
+    presnost: lat ? "gps" : ulice ? "ulice" : "lokalita", lat, lon,
     obec: mc?.startsWith("Praha") ? "Praha" : mc || null, cast_obce: cast || null, mestska_cast: mc || null,
     patro: patro ? +patro : null, podlazi_budovy: cislo(parametry["Počet podlaží budovy"]),
     plocha_m2: cislo(parametry["Užitná plocha"]), pozemek_m2: cislo(parametry["Plocha pozemku"]),

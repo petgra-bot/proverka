@@ -424,7 +424,7 @@ async function overitOdkaz(url) {
     const poradi = (await ohodnot(adresy, inzOdkaz)).filter((x) => x.skore > 0);
     if (poradi.length === 1) return zobrazBudovu(poradi[0], inzOdkaz, { jak: "jediný dům v ulici, který sedí typem", jistota: "střední" });
     if (poradi.length) return vyberNaMape(poradi, [],
-      `Portál nedovoluje inzerát přečíst automaticky, z odkazu známe jen ulici ${esc(nazev)}.`, inzOdkaz);
+      `${url.hostname.endsWith("sreality.cz") ? "Sreality nedovolují inzerát přečíst automaticky" : "Inzerát se teď nepodařilo přečíst"}, z odkazu známe jen ulici ${esc(nazev)}.`, inzOdkaz);
   }
   $("vysledek").innerHTML = karta("upresnit", "Z odkazu nejde vyčíst adresu", `<p>${BEZ_ULICE}</p>`);
 }
