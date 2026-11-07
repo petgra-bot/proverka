@@ -11,13 +11,22 @@ velké tučné nadpisy verzálkami, malé šedé štítky nad nadpisy, ostré ka
 číslované kroky 01–04, tmavé boxy „Proč my“, ceník ve třech sloupcích s prostředním tmavým.
 Vzor: `ukazka/index.html` (https://proverka.gratzer.cz/ukazka/).
 
-**Toto zadání má přednost před obecnými doporučeními skillu `frontend-design`** (ten verzálkové štítky,
-ostré rohy a číslování 01/02/03 považuje za šablonovité; skill sám říká, že výslovné zadání klienta vyhrává).
-Ze skillu ber zbytek: texty z pohledu klienta, jasná tlačítka, přístupnost, mobil, kontrola snímkem obrazovky.
+**Toto zadání má přednost před obecnými doporučeními všech skills** (některé verzálkové štítky, štítky nad nadpisy,
+ostré rohy nebo číslování 01/02/03 zakazují – např. `landing-page-design`, `figma-designer`). Ze skills ber zbytek:
+texty z pohledu klienta, jasná tlačítka, přístupnost, mobil, výkon, střídmé animace, kontrola snímkem obrazovky.
 
-Styl přebíráme, texty, logo a obsah konkurence ne. Žádné vymyšlené recenze ani čísla.
+Styl přebíráme, texty, logo a obsah konkurence ne. Žádné vymyšlené recenze, loga ani čísla.
 
-## Skills v repozitáři
+## Skills v repozitáři (vybral Petr, 7. 11. 2026)
 
-`.claude/skills/frontend-design` a `.claude/skills/webapp-testing` – z `anthropics/skills` (commit 2c5958e,
-licence Apache 2.0, LICENSE.txt u každého). Aktualizace: znovu stáhnout, přečíst změny, pak teprve nahradit.
+Ve `.claude/skills/`, licence MIT (soubory `LICENSE-*`). Před uložením přečteno, bez skriptů a bez odesílání dat.
+
+| Zdroj | Commit | Skills |
+|---|---|---|
+| github.com/emilkowalski/skills | c8a7962 | celé repo (17): animace, `emil-design-eng`, `apple-design`, `mobile-native`, `break-ui`, `prototype` aj. (`write-swift`, `animate-expo`, `ask-sonner` jsou pro aplikace, pro web nepoužívat) |
+| github.com/ConardLi/garden-skills | 2b9a893 | `web-design-engineer` |
+| github.com/elayadesign/ai-design-skills | 456d9e0 | `landing-page-design`, `figma-designer` |
+| github.com/MengTo/Skills | 5ea1661 | `build-awwwards-quality-sites` (GSAP, Three.js – pro náš jednoduchý web jen střídmě) |
+| github.com/jakubkrehel/skills | 157da62 | `interface-review` (odkazuje na `better-interface` a `better-*` ze stejného repa, ty zatím nejsou) |
+
+Aktualizace: znovu stáhnout, přečíst změny, pak teprve nahradit.
