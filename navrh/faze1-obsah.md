@@ -132,3 +132,5 @@ Petr: stránka je moc dlouhá a ztrácí se jednoduchost. Rozhodnutí z otázek:
 - **Nadpis:** Prověření bytu a domu před koupí (beze změny).
 - Upozornění „není právní ani znalecký posudek“ zůstává v patičce. Odpovědi z dotazů lze později použít na samostatné stránce.
 - Postup do budoucna: obsah skládat z otázek a odpovědí Petra, ne z hotového návrhu.
+
+**Doplněno 7. 11.:** sekce „Všechno, co rozhoduje o koupi“ (6 karet) a „Časté dotazy“ (10 otázek) jsou samostatné podstránky `co-zjistite.html` a `dotazy.html`, odkaz v navigaci a patičce, z hlavní stránky odkaz „Co všechno prověříme“ pod třemi příklady; každá podstránka končí výzvou „Prověřit zdarma“.
