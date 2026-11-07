@@ -463,3 +463,9 @@ async function overit(e) {
 }
 
 $("formular").addEventListener("submit", overit);
+
+// Předvyplnění z webu Před koupí: ?q=<odkaz nebo adresa> vyplní pole a rovnou ověří.
+{
+  const q = new URLSearchParams(location.search).get("q");
+  if (q) { $("vstup").value = q; $("formular").requestSubmit(); }
+}

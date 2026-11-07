@@ -4,317 +4,412 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Před koupí – prověření bytu a domu (ukázka vzhledu)</title>
+<title>Kontrola bytu a domu před koupí v Praze | Před koupí</title>
+<meta name="description" content="Vložte odkaz na inzerát. Za pár minut víte, co koupi ohrožuje: břemena, exekuce, územní plán, hluk, povodně. Cena z prodejů v katastru. Od 790 Kč.">
+<meta property="og:title" content="Před koupí – prověření bytu a domu">
+<meta property="og:description" content="Za pár minut víte, co může koupi zastavit, co se chystá v okolí a jaké úkoly máte před podpisem.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* ---------- Tokeny (zadání vzhledu v CLAUDE.md) ---------- */
 :root {
-  --navy: #1e2645; --navy-2: #283157; --navy-3: #323c66; --text: #1e2645; --tlumene: #6b7186;
-  --linka: #dfe2ea; --svetla: #f1f2f6; --bila: #ffffff; --akcent: #c9a227;
-  --zelena: #2e7d4f; --oranzova: #c46a12; --cervena: #b83232;
+  --navy: #1e2645; --navy-2: #283157; --navy-3: #343e6b;
+  --text: #1e2645; --tlumene: #5d6377; --linka: #dfe2ea; --svetla: #f1f2f6; --bila: #ffffff;
+  --na-tmave: rgba(255,255,255,.72); --na-tmave-slabe: rgba(255,255,255,.6); --linka-tmava: rgba(255,255,255,.14);
+  --cervena: #b83232; --oranzova: #a85a0c; --zelena: #2e7d4f; --seda: #59607a; --akcent: #c9a227;
+  --mezera-sekce: clamp(64px, 9vw, 104px);
+  --obal: 1120px;
+  --krivka: cubic-bezier(.22, 1, .36, 1);
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bila); color: var(--text); font: 15px/1.6 "Montserrat", system-ui, Arial, sans-serif; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bila); color: var(--text);
+  font: 400 16px/1.6 "Montserrat", system-ui, sans-serif; font-feature-settings: "lnum" 1; }
 a { color: inherit; }
-.obal { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-.stitek { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--tlumene); }
-h1, h2, h3 { text-transform: uppercase; font-weight: 800; letter-spacing: -.01em; line-height: 1.05; margin: 0; }
-h1 { font-size: clamp(34px, 6vw, 64px); }
-h2 { font-size: clamp(26px, 3.6vw, 40px); }
-h3 { font-size: 15px; letter-spacing: .02em; line-height: 1.3; }
-.tl { display: inline-block; padding: 13px 22px; font: 600 12px/1 "Montserrat", sans-serif; letter-spacing: .1em;
-  text-transform: uppercase; text-decoration: none; border: 1px solid var(--bila); cursor: pointer; }
-.tl.plne { background: var(--bila); color: var(--navy); }
-.tl.obrys { background: transparent; color: var(--bila); border-color: rgba(255,255,255,.45); }
-.tl.tmave { background: var(--navy); color: var(--bila); border-color: var(--navy); }
+p { margin: 0; text-wrap: pretty; }
+.obal { max-width: var(--obal); margin: 0 auto; padding: 0 24px; }
+:focus-visible { outline: 3px solid var(--akcent); outline-offset: 2px; }
+.preskocit { position: absolute; left: 16px; top: -48px; z-index: 10; background: var(--bila); color: var(--navy);
+  padding: 10px 14px; font-weight: 600; text-decoration: none; }
+.preskocit:focus { top: 12px; }
+.skryte { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* Ukázkový pruh */
-.ukazka { background: var(--akcent); color: var(--navy); text-align: center; font-size: 12px; font-weight: 600; padding: 6px 16px; }
+/* Typografie */
+h1, h2, h3 { margin: 0; text-transform: uppercase; font-weight: 800; letter-spacing: -.01em; line-height: 1.04; text-wrap: balance; }
+h1 { font-size: clamp(36px, 5.6vw, 64px); }
+h2 { font-size: clamp(28px, 3.6vw, 42px); }
+h3 { font-size: 15px; font-weight: 700; letter-spacing: .02em; line-height: 1.3; }
+.stitek { display: block; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--tlumene); }
+.tmave .stitek, .uvod .stitek { color: var(--na-tmave-slabe); }
+.uvodni-text { font-size: 17px; color: var(--tlumene); max-width: 46ch; }
+
+/* Tlačítka */
+.tl { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px;
+  font: 600 12px/1 "Montserrat", sans-serif; letter-spacing: .1em; text-transform: uppercase; text-decoration: none;
+  border: 1px solid transparent; cursor: pointer; transition: background-color .2s var(--krivka), color .2s var(--krivka), transform .1s; }
+.tl:active { transform: translateY(1px); }
+.tl.svetle { background: var(--bila); color: var(--navy); }
+.tl.svetle:hover { background: #e6e8f0; }
+.tl.tmave-tl { background: var(--navy); color: var(--bila); }
+.tl.tmave-tl:hover { background: var(--navy-3); }
+.tl.obrys { color: var(--bila); border-color: rgba(255,255,255,.45); background: transparent; }
+.tl.obrys:hover { background: rgba(255,255,255,.08); }
+
+/* Pruh ukázky */
+.pruh-ukazky { background: var(--akcent); color: var(--navy); text-align: center; font-size: 12px; font-weight: 600; padding: 6px 16px; }
 
 /* Hlavička */
-header.hlavicka { background: var(--navy); color: var(--bila); border-bottom: 1px solid rgba(255,255,255,.08); }
-.lista { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 68px; }
-.logo { display: flex; flex-direction: column; text-decoration: none; line-height: 1.1; }
+.hlavicka { background: var(--navy); color: var(--bila); border-bottom: 1px solid var(--linka-tmava); }
+.lista { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 68px; }
+.logo { display: flex; flex-direction: column; text-decoration: none; line-height: 1.15; }
 .logo b { font-weight: 800; letter-spacing: .06em; font-size: 15px; }
-.logo span { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; opacity: .65; }
-nav { display: flex; gap: 26px; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
-nav a { text-decoration: none; opacity: .8; }
-nav a:hover { opacity: 1; }
-@media (max-width: 860px) { nav { display: none; } }
+.logo span { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--na-tmave-slabe); }
+.hlavicka nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+.hlavicka nav a { font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; color: var(--na-tmave); }
+.hlavicka nav a:hover { color: var(--bila); }
+.hlavicka .tl { min-height: 40px; padding: 0 16px; white-space: nowrap; }
+@media (max-width: 420px) { .hlavicka .tl { padding: 0 12px; letter-spacing: .06em; } .logo span { display: none; } }
+@media (max-width: 900px) { .hlavicka nav { display: none; } }
+
+/* Formulář zadání */
+.zadani label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.pole { display: flex; border: 1px solid rgba(255,255,255,.4); background: rgba(255,255,255,.04); }
+.pole:focus-within { border-color: var(--bila); }
+.pole input { flex: 1; min-width: 0; min-height: 56px; padding: 0 18px; border: 0; outline: none; background: transparent;
+  color: var(--bila); font: 500 16px "Montserrat", sans-serif; }
+.pole input::placeholder { color: rgba(255,255,255,.5); }
+.pole .tl { min-height: 56px; border: 0; }
+.zadani .napoveda { font-size: 13px; color: var(--na-tmave-slabe); margin-top: 10px; }
+@media (max-width: 560px) { .pole { flex-direction: column; } }
 
 /* Úvod */
-.uvod { background: var(--navy); color: var(--bila); padding: 72px 0 84px; }
-.uvod .stitek { color: rgba(255,255,255,.6); }
-.uvod h1 { margin: 14px 0 22px; max-width: 820px; }
-.uvod p.pod { max-width: 560px; color: rgba(255,255,255,.75); font-size: 16px; margin: 0 0 30px; }
-.zadani { display: flex; max-width: 640px; border: 1px solid rgba(255,255,255,.35); }
-.zadani input { flex: 1; min-width: 0; padding: 16px 18px; font: 500 15px "Montserrat", sans-serif; color: var(--bila);
-  background: transparent; border: 0; outline: none; }
-.zadani input::placeholder { color: rgba(255,255,255,.5); }
-.zadani .tl { border: 0; }
-.uvod .male { font-size: 12px; color: rgba(255,255,255,.55); margin-top: 12px; }
-@media (max-width: 560px) { .zadani { flex-direction: column; } }
+.uvod { background: var(--navy); color: var(--bila); padding: clamp(48px, 7vw, 88px) 0 clamp(56px, 8vw, 96px); }
+.uvod .obal { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+.uvod h1 { margin: 14px 0 22px; }
+.uvod .podnadpis { font-size: 17px; color: var(--na-tmave); max-width: 44ch; margin-bottom: 32px; }
+.duvera { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--linka-tmava); font-size: 13px; color: var(--na-tmave-slabe); max-width: 52ch; }
+@media (max-width: 960px) { .uvod .obal { grid-template-columns: 1fr; } }
 
-/* Pruh pod úvodem */
-.pruh { border-bottom: 1px solid var(--linka); }
-.pruh .obal { display: grid; grid-template-columns: 1fr 1fr; }
-.pruh .obal > div { padding: 26px 0; }
-.pruh .obal > div + div { border-left: 1px solid var(--linka); padding-left: 32px; }
-.pruh p { margin: 8px 0 0; font-size: 13px; color: var(--tlumene); }
-@media (max-width: 760px) { .pruh .obal { grid-template-columns: 1fr; } .pruh .obal > div + div { border-left: 0; border-top: 1px solid var(--linka); padding-left: 0; } }
+/* Náhled reportu */
+.nahled { margin: 0; background: var(--bila); color: var(--text); padding: 26px 26px 22px; box-shadow: 0 24px 60px rgba(8, 12, 30, .45); }
+.nahled-hlava { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--linka); padding-bottom: 12px; }
+.nahled-hlava b { font-size: 12px; font-weight: 800; letter-spacing: .06em; }
+.nahled-hlava span { font-size: 11px; color: var(--tlumene); }
+.nahled h3 { font-size: 13px; margin: 16px 0 4px; }
+.nahled .popis { font-size: 12px; color: var(--tlumene); }
+.verdikt { margin-top: 16px; border-left: 4px solid var(--oranzova); padding: 2px 0 2px 14px; font-weight: 700; font-size: 15px; line-height: 1.4; }
+.verdikt.c { border-color: var(--cervena); }
+.semafor { list-style: none; margin: 16px 0 0; padding: 0; font-size: 13px; }
+.semafor li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0; border-top: 1px solid var(--linka); }
+.tmave .semafor li { border-color: var(--linka-tmava); }
+.znacka { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 4px 8px; color: var(--bila); white-space: nowrap; }
+.z-c { background: var(--cervena); } .z-o { background: var(--oranzova); } .z-z { background: var(--zelena); } .z-s { background: var(--seda); }
+.z-l { background: transparent; color: var(--tlumene); border: 1px solid var(--linka); }
+.nahled .pozn { margin-top: 14px; font-size: 11px; color: var(--tlumene); }
 
 /* Sekce */
-section { padding: 84px 0; }
+section { padding: var(--mezera-sekce) 0; }
 section.seda { background: var(--svetla); }
-section.tmava { background: var(--navy); color: var(--bila); }
-section.tmava .stitek { color: rgba(255,255,255,.55); }
-.hlava { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; margin-bottom: 40px; }
-.hlava p { margin: 0; color: var(--tlumene); font-size: 14px; max-width: 440px; justify-self: end; }
-.tmava .hlava p { color: rgba(255,255,255,.65); }
-.hlava h2 { margin-top: 10px; }
+section.tmave { background: var(--navy); color: var(--bila); }
+.hlava { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; margin-bottom: 44px; }
+.hlava h2 { margin-top: 12px; }
+.hlava p { justify-self: end; max-width: 44ch; color: var(--tlumene); font-size: 15px; }
+.tmave .hlava p { color: var(--na-tmave); }
 @media (max-width: 760px) { .hlava { grid-template-columns: 1fr; } .hlava p { justify-self: start; } }
 
-/* Karty oblastí */
+/* Problém */
+.problem { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+.problem p { font-size: 18px; line-height: 1.65; }
+.problem p + p { margin-top: 16px; color: var(--tlumene); font-size: 16px; }
+@media (max-width: 760px) { .problem { grid-template-columns: 1fr; } }
+
+/* Co zjistíte */
 .mrizka { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--linka); border-left: 1px solid var(--linka); }
-.mrizka > div { background: var(--bila); border-right: 1px solid var(--linka); border-bottom: 1px solid var(--linka); padding: 26px 26px 30px; }
-.mrizka .stitek { display: block; text-align: right; font-size: 10px; margin-bottom: 18px; }
-.mrizka p { margin: 10px 0 0; font-size: 13px; color: var(--tlumene); }
+.mrizka > div { background: var(--bila); border-right: 1px solid var(--linka); border-bottom: 1px solid var(--linka); padding: 28px 26px 32px; }
+.mrizka .stitek { text-align: right; font-size: 10px; margin-bottom: 20px; }
+.mrizka p { margin-top: 10px; font-size: 14px; color: var(--tlumene); }
+.mrizka .plus { background: var(--navy); color: var(--bila); }
+.mrizka .plus .stitek { color: var(--na-tmave-slabe); }
+.mrizka .plus p { color: var(--na-tmave); }
 @media (max-width: 900px) { .mrizka { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .mrizka { grid-template-columns: 1fr; } }
 
-/* Postup */
+/* Kroky */
 .postup { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; }
+.postup .uvodni-text { margin-top: 20px; }
 .kroky { margin: 0; padding: 0; list-style: none; }
-.kroky li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: 20px 0; border-top: 1px solid var(--linka); }
+.kroky li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: 24px 0; border-top: 1px solid var(--linka); }
 .kroky li:last-child { border-bottom: 1px solid var(--linka); }
-.kroky .c { font-size: 30px; font-weight: 300; color: #b7bccb; line-height: 1; }
-.kroky p { margin: 6px 0 0; font-size: 13px; color: var(--tlumene); }
+.kroky .c { font-size: 32px; font-weight: 300; color: #8a90a6; line-height: 1; }
+.kroky p { margin-top: 6px; font-size: 14px; color: var(--tlumene); }
 @media (max-width: 760px) { .postup { grid-template-columns: 1fr; gap: 24px; } }
 
 /* Ukázka verdiktu */
-.verdikty { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
-.panel { background: var(--navy-2); border: 1px solid rgba(255,255,255,.08); padding: 28px; }
-.verdikt { border-left: 4px solid var(--cervena); padding: 4px 0 4px 16px; font-weight: 700; font-size: 18px; line-height: 1.35; }
-.semafor { margin: 22px 0 0; padding: 0; list-style: none; font-size: 13px; }
-.semafor li { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-top: 1px solid rgba(255,255,255,.1); }
-.znacka { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; white-space: nowrap; }
-.z-c { background: var(--cervena); } .z-o { background: var(--oranzova); } .z-z { background: var(--zelena); } .z-s { background: #59607a; }
-.panel .male { font-size: 12px; color: rgba(255,255,255,.55); margin-top: 16px; }
-.ukoly { margin: 16px 0 0; padding-left: 18px; font-size: 13px; color: rgba(255,255,255,.8); }
-.ukoly li { margin: 6px 0; }
-@media (max-width: 860px) { .verdikty { grid-template-columns: 1fr; } }
+.dvoupanel { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
+.panel { background: var(--navy-2); border: 1px solid var(--linka-tmava); padding: 28px; }
+.panel .verdikt { font-size: 18px; margin-top: 12px; }
+.ukoly { margin: 14px 0 0; padding-left: 20px; font-size: 14px; color: var(--na-tmave); }
+.ukoly li { margin: 8px 0; }
+.ukoly b { color: var(--bila); font-weight: 600; }
+.panel .pozn { margin-top: 18px; font-size: 12px; color: var(--na-tmave-slabe); }
+@media (max-width: 860px) { .dvoupanel { grid-template-columns: 1fr; } }
 
-/* Proč my */
-.proc { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start; }
-.proc .uvodni { color: var(--tlumene); font-size: 14px; }
-.duvody { display: grid; gap: 10px; }
-.duvody > div { display: grid; grid-template-columns: 190px 1fr; gap: 20px; background: var(--navy); color: var(--bila); padding: 18px 22px; }
-.duvody h3 { font-size: 13px; }
-.duvody p { margin: 0; font-size: 13px; color: rgba(255,255,255,.72); }
-@media (max-width: 860px) { .proc { grid-template-columns: 1fr; } .duvody > div { grid-template-columns: 1fr; gap: 6px; } }
+/* Velká věta */
+.veta { padding: clamp(72px, 11vw, 128px) 0; }
+.veta p { font-size: clamp(28px, 4.4vw, 52px); font-weight: 800; line-height: 1.12; letter-spacing: -.015em; text-transform: uppercase; max-width: 22ch; text-wrap: balance; }
+.veta p span { color: #8a90a6; }
 
 /* Ceny */
-.ceny { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--linka); }
-.cena { padding: 30px 28px 32px; background: var(--bila); display: flex; flex-direction: column; }
+.ceny { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--linka); }
+.cena { padding: 32px 28px; background: var(--bila); display: flex; flex-direction: column; }
 .cena + .cena { border-left: 1px solid var(--linka); }
 .cena.hlavni { background: var(--navy); color: var(--bila); }
-.cena .stitek { margin-bottom: 8px; }
-.cena.hlavni .stitek { color: rgba(255,255,255,.6); }
-.cena .castka { font-size: 44px; font-weight: 800; letter-spacing: -.02em; margin: 14px 0 2px; }
-.cena .doba { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--tlumene); }
-.cena.hlavni .doba { color: rgba(255,255,255,.6); }
-.cena ul { list-style: none; margin: 22px 0 26px; padding: 0; font-size: 13px; flex: 1; }
-.cena li { padding: 9px 0; border-top: 1px solid var(--linka); }
-.cena.hlavni li { border-color: rgba(255,255,255,.12); }
-.cena li.ne { color: #a3a8b8; text-decoration: line-through; }
-.cena.hlavni li.ne { color: rgba(255,255,255,.35); }
+.cena.hlavni .stitek { color: var(--na-tmave-slabe); }
+.cena h3 { margin-top: 8px; }
+.castka { font-size: 46px; font-weight: 800; letter-spacing: -.02em; margin: 16px 0 2px; }
+.doba { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--tlumene); }
+.cena.hlavni .doba { color: var(--na-tmave-slabe); }
+.cena ul { list-style: none; margin: 24px 0 28px; padding: 0; font-size: 14px; flex: 1; }
+.cena li { padding: 10px 0; border-top: 1px solid var(--linka); }
+.cena.hlavni li { border-color: var(--linka-tmava); }
+.cena li.ne { color: #8a90a6; }
+.cena li.ne::before { content: "Není: "; position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.cena li.ne { text-decoration: line-through; }
+.cena.hlavni li.ne { color: rgba(255,255,255,.45); }
 @media (max-width: 900px) { .ceny { grid-template-columns: 1fr; } .cena + .cena { border-left: 0; border-top: 1px solid var(--linka); } }
 
 /* Dotazy */
-.dotazy details { border-top: 1px solid var(--linka); padding: 18px 0; }
+.dotazy { max-width: 860px; }
+.dotazy details { border-top: 1px solid var(--linka); }
 .dotazy details:last-child { border-bottom: 1px solid var(--linka); }
-.dotazy summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
-.dotazy summary::after { content: "+"; font-weight: 400; font-size: 20px; line-height: 1; }
+.dotazy summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; padding: 20px 0; font-weight: 700; }
+.dotazy summary::-webkit-details-marker { display: none; }
+.dotazy summary::after { content: "+"; font-weight: 400; font-size: 22px; line-height: 1; }
 .dotazy details[open] summary::after { content: "–"; }
-.dotazy p { margin: 10px 0 0; color: var(--tlumene); font-size: 14px; max-width: 760px; }
+.dotazy details p { padding: 0 0 22px; color: var(--tlumene); font-size: 15px; max-width: 70ch; }
+
+/* Závěr */
+.zaver .obal { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
+@media (max-width: 860px) { .zaver .obal { grid-template-columns: 1fr; } }
 
 /* Patička */
-footer { background: var(--navy); color: rgba(255,255,255,.7); padding: 48px 0 28px; font-size: 13px; }
+footer { background: var(--navy); color: var(--na-tmave); padding: 48px 0 28px; font-size: 13px; border-top: 1px solid var(--linka-tmava); }
 footer .sloupce { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; }
-footer h3 { color: var(--bila); font-size: 12px; margin-bottom: 12px; }
+footer h2 { font-size: 12px; color: var(--bila); margin-bottom: 12px; letter-spacing: .06em; }
 footer ul { list-style: none; margin: 0; padding: 0; }
 footer li { margin: 6px 0; }
-footer .spodek { border-top: 1px solid rgba(255,255,255,.12); margin-top: 36px; padding-top: 18px; font-size: 11px; }
+footer .spodek { border-top: 1px solid var(--linka-tmava); margin-top: 36px; padding-top: 18px; font-size: 12px; color: var(--na-tmave-slabe); }
 @media (max-width: 760px) { footer .sloupce { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-<div class="ukazka">Ukázka vzhledu – texty a ceny podle návrhu, objednávka zatím nefunguje</div>
+<a class="preskocit" href="#obsah">Přejít na obsah</a>
+<div class="pruh-ukazky">Ukázka vzhledu – texty podle schváleného návrhu, objednávka zatím nefunguje</div>
 
 <header class="hlavicka">
   <div class="obal lista">
-    <a class="logo" href="#"><b>PŘED KOUPÍ</b><span>prověření bytu a domu</span></a>
-    <nav>
-      <a href="#co">Co prověříme</a><a href="#postup">Postup</a><a href="#ukazka">Ukázka</a><a href="#ceny">Ceny</a><a href="#dotazy">Dotazy</a>
+    <a class="logo" href="#" aria-label="Před koupí – úvod"><b>PŘED KOUPÍ</b><span>prověření bytu a&nbsp;domu</span></a>
+    <nav aria-label="Hlavní">
+      <ul>
+        <li><a href="#co-zjistite">Co zjistíte</a></li>
+        <li><a href="#postup">Jak to funguje</a></li>
+        <li><a href="#ceny">Ceny</a></li>
+        <li><a href="#dotazy">Dotazy</a></li>
+      </ul>
     </nav>
-    <a class="tl obrys" href="#zacit">Prověřit nemovitost</a>
+    <a class="tl obrys" href="#zacit">Prověřit zdarma</a>
   </div>
 </header>
 
+<main id="obsah">
+
 <div class="uvod" id="zacit">
   <div class="obal">
-    <div class="stitek">Praha · byty a rodinné domy</div>
-    <h1>Prověření bytu a domu před koupí</h1>
-    <p class="pod">Vložte odkaz na inzerát nebo adresu. Za pár minut víte, co může koupi ohrozit, kolik se v okolí skutečně prodávalo a co udělat před podpisem.</p>
-    <form class="zadani" action="../" method="get" onsubmit="return false">
-      <input type="text" placeholder="Odkaz na inzerát nebo adresa, např. Karlická 49, Radotín" aria-label="Odkaz na inzerát nebo adresa">
-      <a class="tl plne" href="../">Prověřit zdarma</a>
-    </form>
-    <div class="male">Přehled povodní, hluku, radonu a územního plánu zdarma do pár vteřin, bez registrace.</div>
-  </div>
-</div>
-
-<div class="pruh">
-  <div class="obal">
-    <div><div class="stitek">Co prověřujeme</div><p>Právní stav · Majitel · Územní plán a okolí · Povodně a radon · Hluk · Cena · SVJ nebo stav domu</p></div>
-    <div><div class="stitek">Co dostanete</div><p>Report v PDF: verdikt jednou větou, rizika s vysvětlením a seznam úkolů před rezervací, podpisem a převodem.</p></div>
-  </div>
-</div>
-
-<section id="co" class="seda">
-  <div class="obal">
-    <div class="hlava">
-      <div><div class="stitek">Co prověříme</div><h2>Všechno, co rozhoduje o koupi</h2></div>
-      <p>Jen to, co mění rozhodnutí nebo cenu. Bez vaty o kriminalitě a školách – ty uvidíte sami na mapě.</p>
+    <div>
+      <span class="stitek">Praha · byty a&nbsp;rodinné domy</span>
+      <h1>Prověření bytu a&nbsp;domu před koupí</h1>
+      <p class="podnadpis">Vložte odkaz na inzerát. Za pár minut víte, co může koupi zastavit, co se chystá v&nbsp;okolí a&nbsp;jaké úkoly máte před podpisem.</p>
+      <form class="zadani" action="../" method="get">
+        <label for="vstup-nahore">Odkaz na inzerát nebo adresa</label>
+        <div class="pole">
+          <input id="vstup-nahore" name="q" type="text" required autocomplete="off" placeholder="Karlická 49, Praha 16">
+          <button class="tl svetle" type="submit">Prověřit zdarma</button>
+        </div>
+        <p class="napoveda">Přehled povodní, hluku, radonu a&nbsp;územního plánu do pár vteřin. Bez registrace.</p>
+      </form>
+      <p class="duvera">Data z&nbsp;katastru nemovitostí, insolvenčního rejstříku a&nbsp;Metropolitního plánu. Výpis z&nbsp;katastru je v&nbsp;ceně.</p>
     </div>
-    <div class="mrizka">
-      <div><span class="stitek">Katastr</span><h3>Právní stav</h3><p>Věcná břemena, zástavy, exekuce a plomby z aktuálního výpisu z katastru – to, co koupi nejčastěji zastaví.</p></div>
-      <div><span class="stitek">Rejstříky</span><h3>Majitel</h3><p>Insolvence a exekuce prodávajícího. Exekuce mimo tuto nemovitost ve výpisu z katastru nevidíte.</p></div>
-      <div><span class="stitek">Metropolitní plán · EIA</span><h3>Územní plán a okolí</h3><p>Co se smí stavět na pozemku a vedle něj, chystané stavby, vedení vysokého napětí a ochranná pásma.</p></div>
-      <div><span class="stitek">Mapy povodní · ČGS</span><h3>Povodně a radon</h3><p>Vzdálenost od stoleté vody i povodně 2002 a radonový index podloží s doporučením, zda měřit.</p></div>
-      <div><span class="stitek">Hlukové mapy 2022</span><h3>Hluk</h3><p>Hladina hluku u fasády ve dne i v noci, ze silnice i železnice, a co znamená pro spánek.</p></div>
-      <div><span class="stitek">Prodeje z katastru</span><h3>Cena</h3><p>Odhad ze skutečných prodejů v okolí, ne z nabídek, porovnaný s cenou v inzerátu.</p></div>
+
+    <figure class="nahled" aria-label="Náhled první strany reportu (vymyšlená nemovitost)">
+      <div class="nahled-hlava"><b>PŘED KOUPÍ</b><span>Prověrka · 7. 11. 2026</span></div>
+      <h3>Byt 3+kk, 72&nbsp;<span style="text-transform:none">m²</span>, Praha&nbsp;4</h3>
+      <p class="popis">Ukázka s&nbsp;vymyšlenou nemovitostí</p>
+      <p class="verdikt">Lze pokračovat po ověření: zástavu banky prodávajícího vyřeší úschova, noční hluk ověřte v&nbsp;ložnici.</p>
+      <ul class="semafor">
+        <li>Právní stav <span class="znacka z-o">Pozor</span></li>
+        <li>Územní plán a&nbsp;okolí <span class="znacka z-z">V&nbsp;pořádku</span></li>
+        <li>Povodně a&nbsp;radon <span class="znacka z-z">V&nbsp;pořádku</span></li>
+        <li>Hluk <span class="znacka z-o">Pozor</span></li>
+        <li>SVJ <span class="znacka z-z">V&nbsp;pořádku</span></li>
+        <li>Cena <span class="znacka z-l">v&nbsp;PLUS</span></li>
+      </ul>
+      <figcaption class="pozn">Celý report: verdikt, rizika s&nbsp;vysvětlením a&nbsp;8 úkolů po fázích.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<section aria-labelledby="h-problem">
+  <div class="obal problem">
+    <div><span class="stitek">Proč prověřovat</span><h2 id="h-problem" style="margin-top:12px">Co vám inzerát neřekne</h2></div>
+    <div>
+      <p>Doživotní břemeno, exekuce prodávajícího nebo stavba trati za plotem v&nbsp;inzerátu nebývají. Obvykle se na ně přijde až u&nbsp;advokáta před podpisem – kdy už je zaplacená rezervace.</p>
+      <p>Před koupí je najde dřív, z&nbsp;úředních dat.</p>
     </div>
   </div>
 </section>
 
-<section id="postup">
+<section class="seda" id="co-zjistite" aria-labelledby="h-zjistite">
+  <div class="obal">
+    <div class="hlava">
+      <div><span class="stitek">Co zjistíte</span><h2 id="h-zjistite">Všechno, co rozhoduje o&nbsp;koupi</h2></div>
+      <p>Jen to, co mění rozhodnutí nebo cenu. Kriminalitu a&nbsp;školy uvidíte sami na mapě.</p>
+    </div>
+    <div class="mrizka">
+      <div><span class="stitek">Katastr</span><h3>Co koupi zastaví</h3><p>Věcná břemena, zástavy, exekuce a&nbsp;plomby z&nbsp;aktuálního výpisu z&nbsp;katastru. Ještě před rezervací.</p></div>
+      <div><span class="stitek">Rejstříky</span><h3>Jestli majitel smí prodávat</h3><p>Insolvence prodávajícího, v&nbsp;PLUS i&nbsp;exekuce. Exekuci mimo tuto nemovitost ve výpisu z&nbsp;katastru neuvidíte.</p></div>
+      <div><span class="stitek">Metropolitní plán</span><h3>Co se postaví vedle</h3><p>Územní plán po parcelách, chystané stavby a&nbsp;jejich posudky vlivu na okolí, vedení vysokého napětí.</p></div>
+      <div><span class="stitek">Mapy hluku a&nbsp;povodní</span><h3>Jak tam bude hlučno a&nbsp;mokro</h3><p>Hluk u&nbsp;fasády ve dne a&nbsp;v&nbsp;noci, vzdálenost od stoleté vody, radon. Z&nbsp;naměřených map, ne z&nbsp;dojmu.</p></div>
+      <div><span class="stitek">Úkoly na míru</span><h3>Co udělat a&nbsp;kdy</h3><p>Úkoly před rezervací, před podpisem a&nbsp;při převodu – pro vás, advokáta i&nbsp;banku.</p></div>
+      <div class="plus"><span class="stitek">Jen v&nbsp;PLUS</span><h3>Kolik stojí doopravdy</h3><p>Odhad ze skutečných prodejů v&nbsp;okolí z&nbsp;katastru, srovnaný s&nbsp;cenou v&nbsp;inzerátu.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="postup" aria-labelledby="h-postup">
   <div class="obal postup">
     <div>
-      <div class="stitek">Postup</div>
-      <h2>Od odkazu k reportu</h2>
-      <p style="color:var(--tlumene);font-size:14px;margin-top:18px;max-width:340px">Nic nevyplňujete, co umíme zjistit sami. U bytu se zeptáme nanejvýš na plochu.</p>
+      <span class="stitek">Jak to funguje</span>
+      <h2 id="h-postup" style="margin-top:12px">Od odkazu k&nbsp;reportu</h2>
+      <p class="uvodni-text">Nic nevyplňujete, co umíme zjistit sami.</p>
     </div>
     <ol class="kroky">
-      <li><span class="c">01</span><div><h3>Vložíte odkaz nebo adresu</h3><p>Inzerát ze Sreality, Bezrealitek nebo iDNES, nebo jen ulici a číslo.</p></div></li>
-      <li><span class="c">02</span><div><h3>Přehled zdarma</h3><p>Do pár vteřin povodně, hluk, radon, územní plán a okolí – ještě než cokoli zaplatíte.</p></div></li>
-      <li><span class="c">03</span><div><h3>Zvolíte Prověrku</h3><p>E-mail a platba. U bytu případně potvrdíte, o který byt v domě jde.</p></div></li>
-      <li><span class="c">04</span><div><h3>Report do pár minut</h3><p>PDF e-mailem: verdikt, rizika s vysvětlením a úkoly pro vás, advokáta a banku.</p></div></li>
+      <li><span class="c" aria-hidden="true">01</span><div><h3>Vložíte odkaz nebo adresu</h3><p>Do pár vteřin uvidíte přehled povodní, hluku, radonu a&nbsp;územního plánu zdarma.</p></div></li>
+      <li><span class="c" aria-hidden="true">02</span><div><h3>Objednáte Prověrku</h3><p>Zadáte e-mail a&nbsp;zaplatíte. U&nbsp;bytu se zeptáme nanejvýš na plochu.</p></div></li>
+      <li><span class="c" aria-hidden="true">03</span><div><h3>Report přijde do pár minut</h3><p>PDF s&nbsp;verdiktem, riziky a&nbsp;úkoly e-mailem.</p></div></li>
     </ol>
   </div>
 </section>
 
-<section id="ukazka" class="tmava">
+<section class="tmave" aria-labelledby="h-ukazka">
   <div class="obal">
     <div class="hlava">
-      <div><div class="stitek">Ukázka</div><h2>Jak vypadá verdikt</h2></div>
-      <p>Skutečný výsledek testu rodinného domu v Radotíně. Konkurenční služba tentýž dům označila za „solidní koupi“.</p>
+      <div><span class="stitek">Ukázka</span><h2 id="h-ukazka">Jak vypadá verdikt</h2></div>
+      <p>Skutečný výsledek z&nbsp;testu rodinného domu v&nbsp;Praze. Jedna věta, která rozhoduje.</p>
     </div>
-    <div class="verdikty">
+    <div class="dvoupanel">
       <div class="panel">
-        <div class="stitek">Verdikt</div>
-        <p class="verdikt">Koupit až po vyřešení: doživotní věcné břemeno užívání musí být vymazáno, kupní cena v úschově do výmazu.</p>
+        <span class="stitek">Verdikt</span>
+        <p class="verdikt c">Koupit až po vyřešení: doživotní věcné břemeno užívání musí být vymazáno, kupní cena v&nbsp;úschově do výmazu.</p>
         <ul class="semafor">
           <li>Právní stav <span class="znacka z-c">Riziko</span></li>
-          <li>Územní plán a okolí <span class="znacka z-o">Pozor</span></li>
-          <li>Povodně a radon <span class="znacka z-z">V pořádku</span></li>
+          <li>Územní plán a&nbsp;okolí <span class="znacka z-o">Pozor</span></li>
+          <li>Povodně a&nbsp;radon <span class="znacka z-z">V&nbsp;pořádku</span></li>
           <li>Hluk <span class="znacka z-c">Riziko</span></li>
-          <li>Cena <span class="znacka z-s">v PLUS</span></li>
           <li>Stav domu <span class="znacka z-s">Nezjištěno</span></li>
         </ul>
       </div>
       <div class="panel">
-        <div class="stitek">Co udělat – výběr, zkráceno</div>
+        <span class="stitek">Co udělat – výběr, zkráceno</span>
         <ol class="ukoly">
-          <li><b>Před rezervací:</b> ověřit s prodávajícím, zda oprávněná z břemene souhlasí s výmazem.</li>
+          <li><b>Před rezervací:</b> ověřit s&nbsp;prodávajícím, zda oprávněná z&nbsp;břemene souhlasí s&nbsp;výmazem.</li>
           <li><b>Před podpisem:</b> advokát připraví podmínku výmazu břemene do kupní smlouvy.</li>
-          <li><b>Před podpisem:</b> zjistit termín rekonstrukce sousední trati a dopad na hluk.</li>
+          <li><b>Před podpisem:</b> zjistit termín rekonstrukce sousední trati a&nbsp;dopad na hluk.</li>
           <li><b>Při převodu:</b> kupní cenu jen přes úschovu, do výmazu břemene.</li>
         </ol>
-        <p class="male">Celý report: 3 strany základní, 9 stran podrobný.</p>
+        <p class="pozn">Celý report měl 3 strany, podrobný 9 stran.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="seda">
-  <div class="obal proc">
-    <div>
-      <div class="stitek">Proč my</div>
-      <h2>Data místo dojmů</h2>
-      <p class="uvodni" style="margin-top:18px;max-width:380px">Každé zjištění má zdroj a datum. Žádné popisy fotek od oka, žádné skóre 0–100, ve kterém se zásadní problém ztratí.</p>
-    </div>
-    <div class="duvody">
-      <div><h3>Za pár minut</h3><p>Prověrka do 4 minut, s odhadem ceny do 10 minut. Ne za dva dny.</p></div>
-      <div><h3>Verdikt jednou větou</h3><p>Riziko, které koupi znemožňuje, rozhodne samo. Žádný průměr, který ho schová.</p></div>
-      <div><h3>Cena ze skutečných prodejů</h3><p>Kupní ceny z katastru v okolí, ne požadované ceny z inzerátů.</p></div>
-      <div><h3>Úkoly na míru</h3><p>Co udělat před rezervací, před podpisem a při převodu – podle toho, co jsme našli.</p></div>
-      <div><h3>Nezávislost</h3><p>Nejsme realitní kancelář a nemovitosti neprodáváme.</p></div>
-    </div>
-  </div>
+<section class="veta" aria-label="Hlavní myšlenka">
+  <div class="obal"><p>Inzerát ukazuje, co chce prodávající. <span>Katastr a&nbsp;mapy ukazují, co kupujete.</span></p></div>
 </section>
 
-<section id="ceny">
+<section class="seda" id="ceny" aria-labelledby="h-ceny">
   <div class="obal">
     <div class="hlava">
-      <div><div class="stitek">Ceny</div><h2>Tři úrovně</h2></div>
-      <p>Začněte zdarma. Prověrku si objednáte, až když vás nemovitost opravdu zajímá.</p>
+      <div><span class="stitek">Ceny</span><h2 id="h-ceny">Tři úrovně</h2></div>
+      <p>Začněte zdarma. Prověrku objednáte, až když vás nemovitost opravdu zajímá.</p>
     </div>
     <div class="ceny">
       <div class="cena">
-        <div class="stitek">Zdarma</div><h3>Ochutnávka</h3>
-        <div class="castka">0 Kč</div><div class="doba">do pár vteřin</div>
-        <ul><li>Povodně a radon</li><li>Hluk</li><li>Územní plán a okolí</li><li>Letecký snímek s pozemkem</li><li class="ne">Právní stav a majitel</li><li class="ne">Cena</li></ul>
-        <a class="tl tmave" href="../">Vyzkoušet</a>
+        <span class="stitek">Zdarma</span><h3>Ochutnávka</h3>
+        <div class="castka">0&nbsp;Kč</div><div class="doba">do pár vteřin</div>
+        <ul><li>Povodně a&nbsp;radon</li><li>Hluk</li><li>Územní plán a&nbsp;okolí</li><li>Letecký snímek s&nbsp;pozemkem</li><li class="ne">Právní stav a&nbsp;majitel</li><li class="ne">Cena</li></ul>
+        <a class="tl tmave-tl" href="#zacit">Prověřit zdarma</a>
       </div>
       <div class="cena hlavni">
-        <div class="stitek">Základ</div><h3>Prověrka</h3>
-        <div class="castka">790 Kč</div><div class="doba">do 4 minut</div>
-        <ul><li>Výpis z katastru a právní stav</li><li>Insolvence majitele</li><li>Verdikt a přehled 6 oblastí</li><li>Úkoly před podpisem na míru</li><li>Report v PDF do 4 stran</li><li class="ne">Odhad ceny</li></ul>
-        <a class="tl plne" href="#zacit">Objednat Prověrku</a>
+        <span class="stitek">Základ</span><h3>Prověrka</h3>
+        <div class="castka">790&nbsp;Kč</div><div class="doba">do 4&nbsp;minut</div>
+        <ul><li>Výpis z&nbsp;katastru a&nbsp;právní stav</li><li>Insolvence majitele</li><li>Verdikt a&nbsp;přehled 6&nbsp;oblastí</li><li>Úkoly před podpisem na míru</li><li>Report v&nbsp;PDF do 4&nbsp;stran</li><li class="ne">Odhad ceny</li></ul>
+        <a class="tl svetle" href="#zacit">Objednat Prověrku</a>
       </div>
       <div class="cena">
-        <div class="stitek">Včetně ceny</div><h3>Prověrka PLUS</h3>
-        <div class="castka">1 290 Kč</div><div class="doba">do 10 minut</div>
-        <ul><li>Vše z Prověrky</li><li>Odhad ceny z prodejů v katastru</li><li>Srovnání s cenou v inzerátu</li><li>Exekuce majitele</li><li>Podrobný report s mapami a daní</li></ul>
-        <a class="tl tmave" href="#zacit">Objednat PLUS</a>
+        <span class="stitek">Včetně ceny</span><h3>Prověrka PLUS</h3>
+        <div class="castka">1&nbsp;290&nbsp;Kč</div><div class="doba">do 10&nbsp;minut</div>
+        <ul><li>Vše z&nbsp;Prověrky</li><li>Odhad ceny z&nbsp;prodejů v&nbsp;katastru</li><li>Srovnání s&nbsp;cenou v&nbsp;inzerátu</li><li>Exekuce majitele</li><li>Podrobný report s&nbsp;mapami a&nbsp;daní</li></ul>
+        <a class="tl tmave-tl" href="#zacit">Objednat PLUS</a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="dotazy" class="seda">
+<section id="dotazy" aria-labelledby="h-dotazy">
   <div class="obal">
-    <div class="hlava"><div><div class="stitek">Dotazy</div><h2>Časté dotazy</h2></div></div>
+    <div class="hlava"><div><span class="stitek">Dotazy</span><h2 id="h-dotazy">Časté dotazy</h2></div></div>
     <div class="dotazy">
-      <details><summary>Je report právní nebo znalecký posudek?</summary><p>Ne. Shrnuje veřejně dostupná data a řekne, co má ověřit advokát, technik nebo banka. Nenahrazuje advokáta při podpisu ani technickou prohlídku.</p></details>
-      <details><summary>Odkud berete data?</summary><p>Katastr nemovitostí (ČÚZK), insolvenční rejstřík, centrální evidence exekucí, Metropolitní plán (IPR Praha), mapy povodní a hluku hl. m. Prahy, Česká geologická služba, dokumentace EIA. U každého zjištění je zdroj a datum.</p></details>
-      <details><summary>Potřebuji výpis z katastru?</summary><p>Ne, výpis zajistíme sami a je v ceně. Vám ho nepředáváme, v reportu je jen to podstatné.</p></details>
-      <details><summary>Posoudíte i technický stav?</summary><p>Ne na místě. Z dat řekneme, co prověřit, a doporučíme technickou prohlídku.</p></details>
-      <details><summary>Kde služba funguje?</summary><p>Zatím v Praze, pro byty a rodinné domy.</p></details>
+      <details><summary>Je to právní nebo znalecký posudek?</summary><p>Ne. Report shrnuje úřední data a&nbsp;řekne, co má ověřit advokát, technik nebo banka.</p></details>
+      <details><summary>Nahradí mi advokáta?</summary><p>Ne. Ušetří vám čas a&nbsp;peníze tím, že advokát dostane hotový seznam toho, co řešit. Kupní smlouvu a&nbsp;úschovu nechte na advokátovi.</p></details>
+      <details><summary>Proč nestačí nahlížení do katastru zdarma?</summary><p>Nahlížení ukáže zápisy, ale ne co znamenají a&nbsp;co s&nbsp;nimi dělat. Neukáže exekuce prodávajícího mimo tuto nemovitost, územní plán, hluk, povodně ani ceny prodejů.</p></details>
+      <details><summary>Odkud berete data a&nbsp;jak jsou čerstvá?</summary><p>Katastr nemovitostí (výpis ze dne objednávky), insolvenční rejstřík, centrální evidence exekucí, Metropolitní plán, mapy povodní a&nbsp;hluku hl.&nbsp;m. Prahy, Česká geologická služba. U&nbsp;každého zjištění je zdroj a&nbsp;datum.</p></details>
+      <details><summary>Potřebuji výpis z&nbsp;katastru?</summary><p>Ne. Zajistíme ho sami a&nbsp;je v&nbsp;ceně.</p></details>
+      <details><summary>Jak rychle report dostanu?</summary><p>Prověrku do 4&nbsp;minut, Prověrku PLUS do 10&nbsp;minut. Stránku můžete zavřít, report přijde e-mailem.</p></details>
+      <details><summary>Funguje to i&nbsp;pro byt, když neznám číslo bytu?</summary><p>Ano. Byt najdeme podle plochy z&nbsp;inzerátu. Když má víc bytů v&nbsp;domě stejnou plochu, ukážeme je a&nbsp;vyberete jedním kliknutím.</p></details>
+      <details><summary>Posoudíte technický stav?</summary><p>Na místě ne. Z&nbsp;dat řekneme, na co se zaměřit, a&nbsp;doporučíme technickou prohlídku.</p></details>
+      <details><summary>Kde služba funguje?</summary><p>Zatím v&nbsp;Praze, pro byty a&nbsp;rodinné domy.</p></details>
+      <details><summary>Co se stane s&nbsp;údaji?</summary><p>Váš e-mail použijeme jen k&nbsp;doručení reportu. Jména a&nbsp;rodná čísla vlastníků do reportu nepíšeme a&nbsp;výpis z&nbsp;katastru nepředáváme.</p></details>
     </div>
   </div>
 </section>
+
+<section class="tmave zaver" aria-labelledby="h-zaver">
+  <div class="obal">
+    <div><span class="stitek">Začněte zdarma</span><h2 id="h-zaver" style="margin-top:12px">Prověřte nemovitost dřív, než podepíšete rezervaci</h2></div>
+    <form class="zadani" action="../" method="get">
+      <label for="vstup-dole">Odkaz na inzerát nebo adresa</label>
+      <div class="pole">
+        <input id="vstup-dole" name="q" type="text" required autocomplete="off" placeholder="Karlická 49, Praha 16">
+        <button class="tl svetle" type="submit">Prověřit zdarma</button>
+      </div>
+      <p class="napoveda">Bez registrace. Platíte až za Prověrku.</p>
+    </form>
+  </div>
+</section>
+
+</main>
 
 <footer>
   <div class="obal">
     <div class="sloupce">
-      <div><a class="logo" href="#" style="color:#fff"><b>PŘED KOUPÍ</b><span>prověření bytu a domu</span></a>
-        <p style="margin-top:14px;max-width:320px">Rychlé prověření bytu a rodinného domu v Praze před koupí. Nejde o právní ani znalecký posudek.</p></div>
-      <div><h3>Služby</h3><ul><li>Ochutnávka zdarma</li><li>Prověrka</li><li>Prověrka PLUS</li></ul></div>
-      <div><h3>Kontakt</h3><ul><li>doplníme</li></ul></div>
+      <div>
+        <a class="logo" href="#" aria-label="Před koupí – úvod"><b style="color:#fff">PŘED KOUPÍ</b><span>prověření bytu a&nbsp;domu</span></a>
+        <p style="margin-top:14px;max-width:40ch">Prověření bytu a&nbsp;rodinného domu v&nbsp;Praze před koupí. Nejde o&nbsp;právní ani znalecký posudek.</p>
+      </div>
+      <div><h2>Služby</h2><ul><li><a href="#ceny">Ochutnávka zdarma</a></li><li><a href="#ceny">Prověrka</a></li><li><a href="#ceny">Prověrka PLUS</a></li></ul></div>
+      <div><h2>Informace</h2><ul><li>Kontakt (doplníme)</li><li>Obchodní podmínky (připravujeme)</li><li>Ochrana osobních údajů (připravujeme)</li></ul></div>
     </div>
     <div class="spodek">© 2026 predkoupi.cz · ukázka vzhledu</div>
   </div>
