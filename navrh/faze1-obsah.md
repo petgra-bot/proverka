@@ -29,7 +29,7 @@ Podle skillů `landing-page-design` (část A) a `better-writing`. Vizuální pr
 
 - **Nadpis (H1):** Prověření bytu a domu před koupí
 - **Podnadpis:** Vložte odkaz na inzerát. Za pár minut víte, co může koupi zastavit, co se chystá v okolí a jaké úkoly máte před podpisem.
-- **Pole:** popisek „Odkaz na inzerát nebo adresa“, příklad v poli „Karlická 49, Praha 16“
+- **Pole:** popisek „Odkaz na inzerát nebo adresa“, příklad v poli „Karlická 49, Radotín“ (identifikace zatím nebere „Praha 16“, jen část obce)
 - **Tlačítko:** Prověřit zdarma
 - **Pod tlačítkem:** Přehled povodní, hluku, radonu a územního plánu do pár vteřin. Bez registrace.
 - **Řádek důvěry:** Data z katastru nemovitostí, insolvenčního rejstříku a Metropolitního plánu. Výpis z katastru je v ceně.
