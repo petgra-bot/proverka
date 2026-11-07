@@ -27,6 +27,6 @@ Ve `.claude/skills/`, licence MIT (soubory `LICENSE-*`). Před uložením přeč
 | github.com/ConardLi/garden-skills | 2b9a893 | `web-design-engineer` |
 | github.com/elayadesign/ai-design-skills | 456d9e0 | `landing-page-design`, `figma-designer` |
 | github.com/MengTo/Skills | 5ea1661 | `build-awwwards-quality-sites` (GSAP, Three.js – pro náš jednoduchý web jen střídmě) |
-| github.com/jakubkrehel/skills | 157da62 | `interface-review` (odkazuje na `better-interface` a `better-*` ze stejného repa, ty zatím nejsou) |
+| github.com/jakubkrehel/skills | 157da62 | `interface-review` a skills, na které odkazuje: `better-interface`, `better-accessibility`, `better-colors`, `better-layout`, `better-typography`, `better-ui`, `better-writing` |
 
 Aktualizace: znovu stáhnout, přečíst změny, pak teprve nahradit.
