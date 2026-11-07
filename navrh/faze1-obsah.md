@@ -1,4 +1,6 @@
-# Fáze 1 – obsah a struktura webu Před koupí (návrh ke schválení, 7. 11. 2026)
+# Fáze 1 – obsah a struktura webu Před koupí (schváleno 7. 11. 2026)
+
+**Rozhodnutí Petra 7. 11.:** bez záruky vrácení peněz; náhled reportu z vymyšlené nemovitosti; 3 kroky místo 4; recenze a loga až od skutečných zákazníků.
 
 Podle skillů `landing-page-design` (část A) a `better-writing`. Vizuální pravidla skillů neplatí, platí zadání v `CLAUDE.md`.
 
@@ -18,8 +20,8 @@ Podle skillů `landing-page-design` (část A) a `better-writing`. Vizuální pr
 4. Jak to funguje (3 kroky)
 5. Ukázka verdiktu (důkaz)
 6. Velká věta (hlavní myšlenka služby)
-7. Ceny (3 úrovně) + záruka
-8. Časté dotazy (11)
+7. Ceny (3 úrovně)
+8. Časté dotazy (10)
 9. Závěrečná výzva (stejné pole jako nahoře)
 10. Patička (kontakt, podmínky, ochrana údajů)
 
@@ -72,7 +74,7 @@ Podle skillů `landing-page-design` (část A) a `better-writing`. Vizuální pr
 | Doba | do pár vteřin | do 4 minut | do 10 minut |
 | Tlačítko | Prověřit zdarma | Objednat Prověrku | Objednat PLUS |
 
-- **Záruka (rozhodne Petr):** `{{záruka}}` – návrh: „Když report nedoručíme do 30 minut nebo výpis z katastru nezískáme, vrátíme celou částku.“
+- Bez záruky vrácení peněz (rozhodnutí Petra).
 
 ## 8. Časté dotazy
 
@@ -86,7 +88,6 @@ Podle skillů `landing-page-design` (část A) a `better-writing`. Vizuální pr
 8. **Posoudíte technický stav?** Na místě ne. Z dat řekneme, na co se zaměřit, a doporučíme technickou prohlídku.
 9. **Kde služba funguje?** Zatím v Praze, pro byty a rodinné domy.
 10. **Co se stane s údaji?** Váš e-mail použijeme jen k doručení reportu. Jména a rodná čísla vlastníků do reportu nepíšeme a výpis z katastru nepředáváme.
-11. **Co když se něco pokazí?** `{{záruka}}`
 
 ## 9. Závěrečná výzva
 
