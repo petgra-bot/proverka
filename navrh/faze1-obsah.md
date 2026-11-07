@@ -121,3 +121,14 @@ Slovník: produkt „Prověrka“ / „Prověrka PLUS“, sloveso „prověřit�
   - časté dotazy jako FAQ schema
   - později podstránky: kontrola bytu před koupí, kontrola domu před koupí, za kolik se prodal byt, věcné břemeno dožití
 - „Kontrola“ v titulku a „prověření“ v nadpisu pokryjí obě fráze; poměr rozhodnou čísla ze Skliku.
+
+
+## Verze 2 – podle otázek a odpovědí Petra (7. 11. 2026)
+
+Petr: stránka je moc dlouhá a ztrácí se jednoduchost. Rozhodnutí z otázek:
+- **Délka:** střední, 5–7 obrazovek na mobilu (v2 má 6,9 na mobilu, 4,1 na počítači; v1 měla 11).
+- **Sekce:** úvod (jen text a pole, bez náhledu reportu) → Co vám inzerát neřekne (tři krátké příklady) → Jak to funguje (3 kroky) → Ukázka verdiktu (skutečný z testu, s úkoly) → Ceny (tři sloupce s Ochutnávkou).
+- **Vypuštěno:** karty Co zjistíte, velká věta, časté dotazy, závěrečná výzva, náhled reportu v úvodu.
+- **Nadpis:** Prověření bytu a domu před koupí (beze změny).
+- Upozornění „není právní ani znalecký posudek“ zůstává v patičce. Odpovědi z dotazů lze později použít na samostatné stránce.
+- Postup do budoucna: obsah skládat z otázek a odpovědí Petra, ne z hotového návrhu.

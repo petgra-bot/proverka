@@ -86,11 +86,10 @@ h3 { font-size: 15px; font-weight: 700; letter-spacing: .02em; line-height: 1.3;
 
 /* Úvod */
 .uvod { background: var(--navy); color: var(--bila); padding: clamp(48px, 7vw, 88px) 0 clamp(56px, 8vw, 96px); }
-.uvod .obal { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+.uvod .obal > div { max-width: 760px; }
 .uvod h1 { margin: 14px 0 22px; }
 .uvod .podnadpis { font-size: 17px; color: var(--na-tmave); max-width: 44ch; margin-bottom: 32px; }
 .duvera { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--linka-tmava); font-size: 13px; color: var(--na-tmave-slabe); max-width: 52ch; }
-@media (max-width: 960px) { .uvod .obal { grid-template-columns: 1fr; } }
 
 /* Náhled reportu */
 .nahled { margin: 0; background: var(--bila); color: var(--text); padding: 26px 26px 22px; box-shadow: 0 24px 60px rgba(8, 12, 30, .45); }
@@ -118,6 +117,13 @@ section.tmave { background: var(--navy); color: var(--bila); }
 .hlava p { justify-self: end; max-width: 44ch; color: var(--tlumene); font-size: 15px; }
 .tmave .hlava p { color: var(--na-tmave); }
 @media (max-width: 760px) { .hlava { grid-template-columns: 1fr; } .hlava p { justify-self: start; } }
+
+/* Příklady */
+.priklady { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid var(--navy); }
+.priklady li { padding: 24px 24px 0 0; }
+.priklady li + li { padding-left: 24px; border-left: 1px solid var(--linka); }
+.priklady p { margin-top: 8px; color: var(--tlumene); font-size: 15px; }
+@media (max-width: 760px) { .priklady { grid-template-columns: 1fr; } .priklady li, .priklady li + li { padding: 20px 0; border-left: 0; border-bottom: 1px solid var(--linka); } }
 
 /* Problém */
 .problem { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
@@ -213,10 +219,9 @@ footer .spodek { border-top: 1px solid var(--linka-tmava); margin-top: 36px; pad
     <a class="logo" href="#" aria-label="Před koupí – úvod"><b>PŘED KOUPÍ</b><span>prověření bytu a&nbsp;domu</span></a>
     <nav aria-label="Hlavní">
       <ul>
-        <li><a href="#co-zjistite">Co zjistíte</a></li>
         <li><a href="#postup">Jak to funguje</a></li>
+        <li><a href="#ukazka">Ukázka</a></li>
         <li><a href="#ceny">Ceny</a></li>
-        <li><a href="#dotazy">Dotazy</a></li>
       </ul>
     </nav>
     <a class="tl obrys" href="#zacit">Prověřit zdarma</a>
@@ -242,48 +247,20 @@ footer .spodek { border-top: 1px solid var(--linka-tmava); margin-top: 36px; pad
       <p class="duvera">Data z&nbsp;katastru nemovitostí, insolvenčního rejstříku a&nbsp;Metropolitního plánu. Výpis z&nbsp;katastru je v&nbsp;ceně.</p>
     </div>
 
-    <figure class="nahled" aria-label="Náhled první strany reportu (vymyšlená nemovitost)">
-      <div class="nahled-hlava"><b>PŘED KOUPÍ</b><span>Prověrka · 7. 11. 2026</span></div>
-      <h3>Byt 3+kk, 72&nbsp;<span style="text-transform:none">m²</span>, Praha&nbsp;4</h3>
-      <p class="popis">Ukázka s&nbsp;vymyšlenou nemovitostí</p>
-      <p class="verdikt">Lze pokračovat po ověření: zástavu banky prodávajícího vyřeší úschova, noční hluk ověřte v&nbsp;ložnici.</p>
-      <ul class="semafor">
-        <li>Právní stav <span class="znacka z-o">Pozor</span></li>
-        <li>Územní plán a&nbsp;okolí <span class="znacka z-z">V&nbsp;pořádku</span></li>
-        <li>Povodně a&nbsp;radon <span class="znacka z-z">V&nbsp;pořádku</span></li>
-        <li>Hluk <span class="znacka z-o">Pozor</span></li>
-        <li>SVJ <span class="znacka z-z">V&nbsp;pořádku</span></li>
-        <li>Cena <span class="znacka z-l">v&nbsp;PLUS</span></li>
-      </ul>
-      <figcaption class="pozn">Celý report: verdikt, rizika s&nbsp;vysvětlením a&nbsp;8 úkolů po fázích.</figcaption>
-    </figure>
   </div>
 </div>
 
 <section aria-labelledby="h-problem">
-  <div class="obal problem">
-    <div><span class="stitek">Proč prověřovat</span><h2 id="h-problem" style="margin-top:12px">Co vám inzerát neřekne</h2></div>
-    <div>
-      <p>Doživotní břemeno, exekuce prodávajícího nebo stavba trati za plotem v&nbsp;inzerátu nebývají. Obvykle se na ně přijde až u&nbsp;advokáta před podpisem – kdy už je zaplacená rezervace.</p>
-      <p>Před koupí je najde dřív, z&nbsp;úředních dat.</p>
-    </div>
-  </div>
-</section>
-
-<section class="seda" id="co-zjistite" aria-labelledby="h-zjistite">
   <div class="obal">
     <div class="hlava">
-      <div><span class="stitek">Co zjistíte</span><h2 id="h-zjistite">Všechno, co rozhoduje o&nbsp;koupi</h2></div>
-      <p>Jen to, co mění rozhodnutí nebo cenu. Kriminalitu a&nbsp;školy uvidíte sami na mapě.</p>
+      <div><span class="stitek">Proč prověřovat</span><h2 id="h-problem">Co vám inzerát neřekne</h2></div>
+      <p>Před koupí to najde z&nbsp;úředních dat dřív, než zaplatíte rezervaci.</p>
     </div>
-    <div class="mrizka">
-      <div><span class="stitek">Katastr</span><h3>Co koupi zastaví</h3><p>Věcná břemena, zástavy, exekuce a&nbsp;plomby z&nbsp;aktuálního výpisu z&nbsp;katastru. Ještě před rezervací.</p></div>
-      <div><span class="stitek">Rejstříky</span><h3>Jestli majitel smí prodávat</h3><p>Insolvence prodávajícího, v&nbsp;PLUS i&nbsp;exekuce. Exekuci mimo tuto nemovitost ve výpisu z&nbsp;katastru neuvidíte.</p></div>
-      <div><span class="stitek">Metropolitní plán</span><h3>Co se postaví vedle</h3><p>Územní plán po parcelách, chystané stavby a&nbsp;jejich posudky vlivu na okolí, vedení vysokého napětí.</p></div>
-      <div><span class="stitek">Mapy hluku a&nbsp;povodní</span><h3>Jak tam bude hlučno a&nbsp;mokro</h3><p>Hluk u&nbsp;fasády ve dne a&nbsp;v&nbsp;noci, vzdálenost od stoleté vody, radon. Z&nbsp;naměřených map, ne z&nbsp;dojmu.</p></div>
-      <div><span class="stitek">Úkoly na míru</span><h3>Co udělat a&nbsp;kdy</h3><p>Úkoly před rezervací, před podpisem a&nbsp;při převodu – pro vás, advokáta i&nbsp;banku.</p></div>
-      <div class="plus"><span class="stitek">Jen v&nbsp;PLUS</span><h3>Kolik stojí doopravdy</h3><p>Odhad ze skutečných prodejů v&nbsp;okolí z&nbsp;katastru, srovnaný s&nbsp;cenou v&nbsp;inzerátu.</p></div>
-    </div>
+    <ul class="priklady">
+      <li><h3>Doživotní břemeno</h3><p>V&nbsp;bytě nebo domě smí dál bydlet někdo jiný a&nbsp;vy se nenastěhujete.</p></li>
+      <li><h3>Exekuce majitele</h3><p>Prodej bez souhlasu exekutora je neplatný a&nbsp;kupní cena může být ztracená.</p></li>
+      <li><h3>Stavba za plotem</h3><p>Nová silnice, trať nebo dům podle územního plánu – hluk a&nbsp;prach na roky.</p></li>
+    </ul>
   </div>
 </section>
 
@@ -302,7 +279,7 @@ footer .spodek { border-top: 1px solid var(--linka-tmava); margin-top: 36px; pad
   </div>
 </section>
 
-<section class="tmave" aria-labelledby="h-ukazka">
+<section class="tmave" id="ukazka" aria-labelledby="h-ukazka">
   <div class="obal">
     <div class="hlava">
       <div><span class="stitek">Ukázka</span><h2 id="h-ukazka">Jak vypadá verdikt</h2></div>
@@ -334,10 +311,6 @@ footer .spodek { border-top: 1px solid var(--linka-tmava); margin-top: 36px; pad
   </div>
 </section>
 
-<section class="veta" aria-label="Hlavní myšlenka">
-  <div class="obal"><p>Inzerát ukazuje, co chce prodávající. <span>Katastr a&nbsp;mapy ukazují, co kupujete.</span></p></div>
-</section>
-
 <section class="seda" id="ceny" aria-labelledby="h-ceny">
   <div class="obal">
     <div class="hlava">
@@ -364,38 +337,6 @@ footer .spodek { border-top: 1px solid var(--linka-tmava); margin-top: 36px; pad
         <a class="tl tmave-tl" href="#zacit">Objednat PLUS</a>
       </div>
     </div>
-  </div>
-</section>
-
-<section id="dotazy" aria-labelledby="h-dotazy">
-  <div class="obal">
-    <div class="hlava"><div><span class="stitek">Dotazy</span><h2 id="h-dotazy">Časté dotazy</h2></div></div>
-    <div class="dotazy">
-      <details><summary>Je to právní nebo znalecký posudek?</summary><p>Ne. Report shrnuje úřední data a&nbsp;řekne, co má ověřit advokát, technik nebo banka.</p></details>
-      <details><summary>Nahradí mi advokáta?</summary><p>Ne. Ušetří vám čas a&nbsp;peníze tím, že advokát dostane hotový seznam toho, co řešit. Kupní smlouvu a&nbsp;úschovu nechte na advokátovi.</p></details>
-      <details><summary>Proč nestačí nahlížení do katastru zdarma?</summary><p>Nahlížení ukáže zápisy, ale ne co znamenají a&nbsp;co s&nbsp;nimi dělat. Neukáže exekuce prodávajícího mimo tuto nemovitost, územní plán, hluk, povodně ani ceny prodejů.</p></details>
-      <details><summary>Odkud berete data a&nbsp;jak jsou čerstvá?</summary><p>Katastr nemovitostí (výpis ze dne objednávky), insolvenční rejstřík, centrální evidence exekucí, Metropolitní plán, mapy povodní a&nbsp;hluku hl.&nbsp;m. Prahy, Česká geologická služba. U&nbsp;každého zjištění je zdroj a&nbsp;datum.</p></details>
-      <details><summary>Potřebuji výpis z&nbsp;katastru?</summary><p>Ne. Zajistíme ho sami a&nbsp;je v&nbsp;ceně.</p></details>
-      <details><summary>Jak rychle report dostanu?</summary><p>Prověrku do 4&nbsp;minut, Prověrku PLUS do 10&nbsp;minut. Stránku můžete zavřít, report přijde e-mailem.</p></details>
-      <details><summary>Funguje to i&nbsp;pro byt, když neznám číslo bytu?</summary><p>Ano. Byt najdeme podle plochy z&nbsp;inzerátu. Když má víc bytů v&nbsp;domě stejnou plochu, ukážeme je a&nbsp;vyberete jedním kliknutím.</p></details>
-      <details><summary>Posoudíte technický stav?</summary><p>Na místě ne. Z&nbsp;dat řekneme, na co se zaměřit, a&nbsp;doporučíme technickou prohlídku.</p></details>
-      <details><summary>Kde služba funguje?</summary><p>Zatím v&nbsp;Praze, pro byty a&nbsp;rodinné domy.</p></details>
-      <details><summary>Co se stane s&nbsp;údaji?</summary><p>Váš e-mail použijeme jen k&nbsp;doručení reportu. Jména a&nbsp;rodná čísla vlastníků do reportu nepíšeme a&nbsp;výpis z&nbsp;katastru nepředáváme.</p></details>
-    </div>
-  </div>
-</section>
-
-<section class="tmave zaver" aria-labelledby="h-zaver">
-  <div class="obal">
-    <div><span class="stitek">Začněte zdarma</span><h2 id="h-zaver" style="margin-top:12px">Prověřte nemovitost dřív, než podepíšete rezervaci</h2></div>
-    <form class="zadani" action="../" method="get">
-      <label for="vstup-dole">Odkaz na inzerát nebo adresa</label>
-      <div class="pole">
-        <input id="vstup-dole" name="q" type="text" required autocomplete="off" placeholder="Karlická 49, Radotín">
-        <button class="tl svetle" type="submit">Prověřit zdarma</button>
-      </div>
-      <p class="napoveda">Bez registrace. Platíte až za Prověrku.</p>
-    </form>
   </div>
 </section>
 
