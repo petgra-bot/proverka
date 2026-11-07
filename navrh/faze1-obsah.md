@@ -134,3 +134,5 @@ Petr: stránka je moc dlouhá a ztrácí se jednoduchost. Rozhodnutí z otázek:
 - Postup do budoucna: obsah skládat z otázek a odpovědí Petra, ne z hotového návrhu.
 
 **Doplněno 7. 11.:** sekce „Všechno, co rozhoduje o koupi“ (6 karet) a „Časté dotazy“ (10 otázek) jsou samostatné podstránky `co-zjistite.html` a `dotazy.html`, odkaz v navigaci a patičce, z hlavní stránky odkaz „Co všechno prověříme“ pod třemi příklady; každá podstránka končí výzvou „Prověřit zdarma“.
+
+**Úpravy Petra 7. 11. (po fázi 3):** podnadpis „Vložte odkaz na inzerát. Za pár minut uvidíte, co doopravdy kupujete – právní stav, okolí i úkoly před podpisem.“; řádek o datech z katastru vypuštěn (nehodí se k nabídce zdarma); menší mezery mezi sekcemi; ukázka = „Ukázka placeného reportu: Dům s exekucemi v dražbě“ (test 5, Hostivař, bez adresy; verdikt přeformulován podle šablony pro dražby, originál reportu není v repozitáři); ceník: štítek „Ceník“, nadpis „Vyberte si prověrku“.
