@@ -4,7 +4,7 @@
   --text: #1e2645; --tlumene: #5d6377; --linka: #dfe2ea; --svetla: #f1f2f6; --bila: #ffffff;
   --na-tmave: rgba(255,255,255,.72); --na-tmave-slabe: rgba(255,255,255,.6); --linka-tmava: rgba(255,255,255,.14);
   --cervena: #b83232; --oranzova: #a85a0c; --zelena: #2e7d4f; --seda: #59607a; --akcent: #c9a227;
-  --mezera-sekce: clamp(64px, 9vw, 104px);
+  --mezera-sekce: clamp(44px, 6vw, 72px);
   --obal: 1120px;
   --krivka: cubic-bezier(.22, 1, .36, 1);
 }
@@ -68,7 +68,7 @@ h3 { font-size: 15px; font-weight: 700; letter-spacing: .02em; line-height: 1.3;
 @media (max-width: 560px) { .pole { flex-direction: column; } }
 
 /* Úvod */
-.uvod { background: var(--navy); color: var(--bila); padding: clamp(48px, 7vw, 88px) 0 clamp(56px, 8vw, 96px); }
+.uvod { background: var(--navy); color: var(--bila); padding: clamp(40px, 6vw, 72px) 0 clamp(44px, 6vw, 76px); }
 .uvod .obal > div { max-width: 760px; }
 .uvod h1 { margin: 14px 0 22px; }
 .uvod .podnadpis { font-size: 17px; color: var(--na-tmave); max-width: 44ch; margin-bottom: 32px; }
@@ -95,7 +95,7 @@ h3 { font-size: 15px; font-weight: 700; letter-spacing: .02em; line-height: 1.3;
 section { padding: var(--mezera-sekce) 0; }
 section.seda { background: var(--svetla); }
 section.tmave { background: var(--navy); color: var(--bila); }
-.hlava { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; margin-bottom: 44px; }
+.hlava { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; margin-bottom: 32px; }
 .hlava h2 { margin-top: 12px; }
 .hlava p { justify-self: end; max-width: 44ch; color: var(--tlumene); font-size: 15px; }
 .tmave .hlava p { color: var(--na-tmave); }
@@ -103,7 +103,7 @@ section.tmave { background: var(--navy); color: var(--bila); }
 
 /* Příklady */
 .priklady { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid var(--navy); }
-.priklady li { padding: 24px 24px 0 0; }
+.priklady li { padding: 20px 24px 0 0; }
 .priklady li + li { padding-left: 24px; border-left: 1px solid var(--linka); }
 .priklady p { margin-top: 8px; color: var(--tlumene); font-size: 15px; }
 @media (max-width: 760px) { .priklady { grid-template-columns: 1fr; } .priklady li, .priklady li + li { padding: 20px 0; border-left: 0; border-bottom: 1px solid var(--linka); } }
@@ -194,7 +194,7 @@ footer .spodek { border-top: 1px solid var(--linka-tmava); margin-top: 36px; pad
 
 /* Podstránky a odkazy dál */
 .h1-podstranka { font-size: clamp(32px, 4.6vw, 52px); margin-top: 12px; }
-.dale { margin-top: 28px; }
+.dale { margin-top: 20px; }
 .dale a { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
 .dalsi-krok { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
 .dalsi-krok p { font-size: clamp(20px, 2.4vw, 26px); font-weight: 700; max-width: 30ch; }
@@ -224,3 +224,5 @@ a, summary { touch-action: manipulation; }
   .uvod .obal > div > :nth-child(5) { animation-delay: .24s; }
 }
 @media (max-width: 560px) { .uvod { padding-top: 32px; } .uvod h1 { margin: 10px 0 16px; } .uvod .podnadpis { margin-bottom: 24px; font-size: 16px; } }
+/* Dvě bílé sekce za sebou: okraje se nesčítají */
+section:not(.seda):not(.tmave) + section:not(.seda):not(.tmave) { padding-top: 0; }
