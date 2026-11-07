@@ -13,11 +13,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styl.css?v=5">
+<link rel="stylesheet" href="styl.css?v=8">
 </head>
 <body>
 <a class="preskocit" href="#obsah">Přejít na obsah</a>
-<div class="pruh-ukazky">Ukázka vzhledu – texty podle schváleného návrhu, objednávka zatím nefunguje</div>
+<aside class="pruh-ukazky" aria-label="Upozornění">Ukázka vzhledu – texty podle schváleného návrhu, objednávka zatím nefunguje</aside>
 
 <header class="hlavicka">
   <div class="obal lista">
@@ -89,7 +89,7 @@
   <div class="obal">
     <div class="hlava">
       <div><span class="stitek">Ukázka placeného reportu</span><h2 id="h-ukazka">Dům s&nbsp;exekucemi v&nbsp;dražbě</h2></div>
-      <p>Výsledek našeho testu rodinného domu v&nbsp;Praze, zkráceno. Majitel v&nbsp;konkursu, zástava a&nbsp;tři exekuce – a&nbsp;přesto se dá dražit, když víte jak.</p>
+      <p>Výsledek naší prověrky rodinného domu v&nbsp;Praze, zkráceno. Majitel v&nbsp;konkursu, zástava a&nbsp;tři exekuce – a&nbsp;přesto se dá dražit, když víte jak.</p>
     </div>
     <div class="dvoupanel">
       <div class="panel">
@@ -139,7 +139,7 @@
       </div>
       <div class="cena">
         <span class="stitek">Včetně ceny</span><h3>Prověrka PLUS</h3>
-        <div class="castka">1&nbsp;290&nbsp;Kč</div><div class="doba">do 10&nbsp;minut</div>
+        <div class="castka">1 290&nbsp;Kč</div><div class="doba">do 10&nbsp;minut</div>
         <ul><li>Vše z&nbsp;Prověrky</li><li>Odhad ceny z&nbsp;prodejů v&nbsp;katastru</li><li>Srovnání s&nbsp;cenou v&nbsp;inzerátu</li><li>Exekuce majitele</li><li>Podrobný report s&nbsp;mapami a&nbsp;daní</li></ul>
         <a class="tl tmave-tl" href="#zacit">Objednat PLUS</a>
       </div>
@@ -162,5 +162,15 @@
     <div class="spodek">© 2026 predkoupi.cz · ukázka vzhledu</div>
   </div>
 </footer>
+<script>
+// Prázdné pole nebo jen mezery: česká hláška místo hlášky prohlížeče.
+document.querySelectorAll('form.zadani').forEach(f => {
+  const i = f.querySelector('input');
+  const zprava = 'Vložte odkaz na inzerát nebo adresu, např. Karlická 49, Radotín.';
+  i.addEventListener('invalid', () => i.setCustomValidity(zprava));
+  i.addEventListener('input', () => i.setCustomValidity(''));
+  f.addEventListener('submit', e => { i.value = i.value.trim(); if (!i.value) { e.preventDefault(); i.setCustomValidity(zprava); i.reportValidity(); } });
+});
+</script>
 </body>
 </html>
