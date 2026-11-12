@@ -413,12 +413,16 @@ async function zobrazBudovu(adresa, inz, puvod) {
     </div>` +
     (jina ? "" : vPraze ? `<div id="ochutnavka" class="karta och-karta"></div><div class="co-dal"><h3>Co dál</h3>
       <p>Objednávky Prověrky (790 Kč) a Prověrky PLUS (1 290 Kč) spouštíme v nejbližších týdnech.</p>
-      <div class="akce"><a class="tl tmave-tl" href="../ukazka/#ceny">Co obsahuje Prověrka</a><a class="tl obrys-tmave" href="mailto:info@predkoupi.cz?subject=Zájem o Prověrku">Dát vědět při spuštění</a></div></div>`
+      <div class="akce"><a class="tl tmave-tl" href="/#ceny">Co obsahuje Prověrka</a></div><div class="co-dal-zajem" data-zajem data-zdroj="proverit"></div></div>`
+      // Mimo Prahu (W11, 12. 11. 2026): měříme zájem – e-mail a obec, ať víme, kam službu rozšířit.
       : `<div class="co-dal"><h3>Mimo Prahu zatím neprověřujeme</h3>
       <p>Prověrku zatím děláme jen v Praze, protože pro ni máme nejpodrobnější data (územní plán, záplavy, hluk u fasády).
       Podle zájmu přidáme další obce – nejdřív okolí Prahy.</p>
-      <div class="akce"><a class="tl obrys-tmave" href="mailto:info@predkoupi.cz?subject=${encodeURIComponent("Zájem o prověrku v obci " + obec)}">Dát vědět, až budete i v obci ${esc(obec)}</a></div></div>`);
+      <div class="co-dal-zajem" data-zajem data-zdroj="${esc(("mimo:" + obec).slice(0, 40))}" data-stitek="E-mail pro oznámení, až budeme prověřovat i v obci ${esc(obec)}"
+        data-souhlas="Pošleme jedinou zprávu, až službu rozšíříme do vaší obce, a pak e-mail smažeme. Ukládáme jen e-mail a název obce."
+        data-hotovo="až budeme prověřovat i ve vaší obci"></div></div>`);
   if ($("ochutnavka")) ochutnavka(adresa.so, $("ochutnavka"));
+  document.querySelectorAll("#vysledek [data-zajem]").forEach((k) => window.zajemFormular?.(k));
   $("vysledek").querySelectorAll("button[data-alt]").forEach((btn) => btn.addEventListener("click", () =>
     zobrazBudovu(alternativy[+btn.dataset.alt], inz, { jak: "vybráno z nabídky", jistota: "jistá" }).catch(chyba)));
 }
