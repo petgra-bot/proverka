@@ -1,0 +1,201 @@
+{
+ "datum": "2026-11-04",
+ "nemovitost": {
+  "nazev": "Rodinný dům Karlická 910/49, Praha 16 – Radotín",
+  "popis": "Dům č.p. 910, zastavěná plocha 70 m², 3 podlaží, 4 parcely o celkové výměře 579 m²",
+  "udaje": [
+   {
+    "nazev": "Katastrální území",
+    "hodnota": "Radotín (738620)"
+   },
+   {
+    "nazev": "List vlastnictví",
+    "hodnota": "331"
+   },
+   {
+    "nazev": "Výpis LV ke dni",
+    "hodnota": "24. 10. 2026"
+   },
+   {
+    "nazev": "Typ",
+    "hodnota": "rodinný dům"
+   }
+  ]
+ },
+ "verdikt": {
+  "barva": "cervena",
+  "text": "Koupit až po vyřešení: doživotní věcné břemeno užívání musí být vymazáno a kupní cena patří do úschovy do výmazu.",
+  "stitky": [
+   {
+    "barva": "cervena",
+    "text": "Věcné břemeno užívání"
+   },
+   {
+    "barva": "cervena",
+    "text": "Hluk z trati a silnice"
+   },
+   {
+    "barva": "oranzova",
+    "text": "Plánovaná stavba trati"
+   }
+  ]
+ },
+ "semafor": [
+  {
+   "oblast": "Právní stav",
+   "barva": "cervena",
+   "text": "Doživotní věcné břemeno užívání na domě i zahradě; jiná zástava ani exekuce na výpisu není."
+  },
+  {
+   "oblast": "Územní plán a okolí",
+   "barva": "oranzova",
+   "text": "Stavba trati plánována 2026–2029 (povolení neověřeno); koridor 3,2 m od pozemku; pásmo dráhy omezuje stavby."
+  },
+  {
+   "oblast": "Povodně a radon",
+   "barva": "oranzova",
+   "text": "Mimo záplavy (stoletá voda 42 m od domu); radon z podloží střední – doporučujeme změřit v domě."
+  },
+  {
+   "oblast": "Hluk",
+   "barva": "cervena",
+   "text": "Ve dne 70–75 dB, v noci 60–65 dB (silnice 9 m, trať 18 m od domu)."
+  },
+  {
+   "oblast": "Cena",
+   "barva": "zamceno",
+   "text": "Odhad ceny ze skutečných prodejů je v Prověrce PLUS."
+  },
+  {
+   "oblast": "Stav domu",
+   "barva": "seda",
+   "text": "Dokumenty o stavu nedodány; stáří domu neznáme (datum 1945 je zástupné)."
+  }
+ ],
+ "hlavni_zjisteni": [
+  {
+   "barva": "cervena",
+   "stupen": "A",
+   "titulek": "Doživotní věcné břemeno užívání na domě i zahradě",
+   "text": "Na všech 4 parcelách je zapsané doživotní věcné břemeno užívání ve prospěch fyzické osoby (smlouva z 26. 6. 2014, řízení V-46660/2014-101). Oprávněná osoba smí nemovitost užívat až do smrti a břemeno přechází na kupce, takže dům nemůžete plně užívat, dokud trvá. Nejde o běžnou zástavu, ale o vzácnou a vážnou překážku koupě.",
+   "co_delat": "Kupte až po výmazu: souhlas oprávněné osoby s ověřeným podpisem, cena v úschově do výmazu. Pokud se břemene nevzdá, počítejte s cenou za dům, který nelze užívat."
+  },
+  {
+   "barva": "cervena",
+   "stupen": "A",
+   "titulek": "Hluk u domu: ve dne 70–75 dB, v noci 60–65 dB",
+   "text": "Podle hlukové mapy 2022 je u nejhlučnější fasády ve dne 70–75 dB a v noci 60–65 dB (silnice 9 m, trať 18 m od domu); na zahradě ve dne až 70–75 dB. WHO doporučuje v noci u silnice méně než 45 dB. Dokumentace stavby trati uvádí překročení nočního limitu a po stavbě stěn má hluk klesnout, ale zda u domu stěna nebo individuální opatření bude, si dokumenty odporují.",
+   "co_delat": "Přijďte se podívat večer a v noci, kdy jezdí vlaky, a zjistěte, kam míří okna ložnic. Správu železnic se zeptejte na stěnu u domu."
+  },
+  {
+   "barva": "oranzova",
+   "stupen": "B",
+   "titulek": "Rekonstrukce trati u pozemku, stavba plánována 2026–2029",
+   "text": "Modernizace dvoukolejné trati (záměr Správy železnic, stanovisko k vlivům na životní prostředí vydáno) má koridor 8,5 m od domu a 3,2 m od nejbližšího pozemku. Na žádnou ze 4 parcel nezasahuje a zábor v přehledu dotčených pozemků (stav 2018) jsme nenašli. Územní rozhodnutí z 19. 6. 2025 se týká úseku Černošice – Odb. Berounka; zda i radotínského konce u domu, neznáme. Počítejte s několika lety stavby 18 m od domu.",
+   "co_delat": "Zeptejte se Správy železnic na harmonogram úseku Radotín, zábor parcel a protihlukové stěny u domu."
+  },
+  {
+   "barva": "oranzova",
+   "stupen": "C",
+   "titulek": "Znění smlouvy o břemeni neznáme",
+   "text": "Z výpisu nevyplývá, zda břemeno zahrnuje celý dům, nebo jen část, ani zda se oprávněná osoba v domě fakticky zdržuje. Bez znění smlouvy nejde posoudit, co přesně užívá a za jakých podmínek břemeno zanikne.",
+   "co_delat": "Vyžádejte smlouvu V-46660/2014-101 ze sbírky listin a předejte ji advokátovi."
+  }
+ ],
+ "dalsi_zjisteni": [
+  {
+   "barva": "zelena",
+   "titulek": "Mimo záplavové území; povodeň 2002 33 m od domu",
+   "text": "Hranice stoleté vody je 42 m od domu, rozliv povodně 2002 33 m. Terén u domu je odhadem o 2,8 m výš než nejbližší hranice rozlivu z roku 2002. Přívalové povodně a zpětné vzdutí kanalizace žádná mapa neukazuje."
+  },
+  {
+   "barva": "zelena",
+   "titulek": "Územní plán: stabilizovaná obytná lokalita",
+   "text": "4 parcely leží v zastavitelné obytné lokalitě, na žádné není koridor stavby. Na 111 m² zahrady je rozvojová plocha (odhad), stavět lze ale jen se souhlasem Správy železnic, státní správy lesů a po vynětí ze zemědělského půdního fondu."
+  },
+  {
+   "barva": "oranzova",
+   "titulek": "Radon z podloží střední",
+   "text": "Mapa podloží dává index 2 ze 3 (střední); měření v okolí do 1 km: 2 (nízké a střední). Měření radonu v domě neznáme, mapa ukazuje jen pravděpodobnost."
+  },
+  {
+   "barva": "seda",
+   "titulek": "Voda, kanalizace a plyn jen podle evidence",
+   "text": "V registru budov je dům napojen na kanalizaci, vodovod a plyn z veřejné sítě, vytápění kotlem v domě. Jde o evidenční údaj, smlouvy ani vyúčtování nemáme."
+  }
+ ],
+ "ukoly": [
+  {
+   "kdy": "pred-rezervaci",
+   "ukol": "Zeptejte se, zda se oprávněná osoba věcného břemene vzdá a kdy dům opustí. Bez jejího souhlasu s výmazem rezervaci neplaťte.",
+   "komu": "prodávající",
+   "k_cemu": "Doživotní věcné břemeno užívání"
+  },
+  {
+   "kdy": "pred-rezervaci",
+   "ukol": "Nechte připravit výmaz břemene: souhlas oprávněné osoby s ověřeným podpisem, návrh na vklad a kupní cenu v úschově do výmazu.",
+   "komu": "advokát",
+   "k_cemu": "Doživotní věcné břemeno užívání"
+  },
+  {
+   "kdy": "pred-rezervaci",
+   "ukol": "Zeptejte se na harmonogram stavby v úseku Radotín, na zábor parcel 1646/1, 1646/2, 1647/2, 1647/3 a protihlukové stěny či okna u domu.",
+   "komu": "Správa železnic",
+   "k_cemu": "Rekonstrukce trati u pozemku, hluk"
+  },
+  {
+   "kdy": "pred-rezervaci",
+   "ukol": "Zjistěte, kam míří okna ložnic (k silnici a trati, nebo do zahrady) a jak tlumí hluk; přijďte se podívat večer.",
+   "komu": "prodávající",
+   "k_cemu": "Hluk v noci 60–65 dB"
+  },
+  {
+   "kdy": "pred-rezervaci",
+   "ukol": "Zjistěte požadovanou cenu, užitnou plochu, jak dlouho je dům v nabídce a zda byla cena snížena; pak ji porovnejte s trhem.",
+   "komu": "prodávající",
+   "k_cemu": "Cena: nezadána cena ani plocha"
+  },
+  {
+   "kdy": "pred-podpisem",
+   "ukol": "Vyžádejte znění smlouvy V-46660/2014-101 (rozsah užívání, podmínky zániku) ze sbírky listin a nechte ho posoudit.",
+   "komu": "advokát",
+   "k_cemu": "Znění smlouvy o břemeni neznáme"
+  },
+  {
+   "kdy": "pred-podpisem",
+   "ukol": "Chtějte kolaudaci, povolení přístaveb a garáže, průkaz energetické náročnosti a revize; dům nechte zkontrolovat nezávislým technikem (střecha, vlhkost, statika, kotel).",
+   "komu": "prodávající, technik",
+   "k_cemu": "Stavby mimo katastr, stav domu bez dokumentů"
+  },
+  {
+   "kdy": "pri-prevodu",
+   "ukol": "Těsně před podpisem ověřte prodávajícího v insolvenčním rejstříku a evidenci exekucí a vezměte čerstvý výpis LV. Cenu uvolněte z úschovy až po výmazu břemene.",
+   "komu": "advokát",
+   "k_cemu": "Rejstříky neověřujeme; břemeno"
+  }
+ ],
+ "nezjisteno": [
+  "Požadovaná cena a užitná plocha domu: bez nich neumíme říct, zda nepřeplácíte.",
+  "Technický stav domu: nebyl dodán průkaz energetické náročnosti, kolaudace, revize ani doklady o opravách.",
+  "Znění smlouvy o věcném břemeni: rozsah užívání a podmínky zániku.",
+  "Exekuce a insolvence prodávajícího: rejstříky automaticky neověřujeme (insolvenční zakazuje roboty, evidence exekucí je placená)."
+ ],
+ "zdroje": [
+  "Výpis z katastru nemovitostí, LV 331, k. ú. Radotín, stav k 24. 10. 2026",
+  "RÚIAN – stavební objekt a parcely, ČÚZK, ověřeno 4. 11. 2026",
+  "Geoportál Praha – záplavová území a strategická hluková mapa 2022, 4. 11. 2026",
+  "Ministerstvo zdravotnictví – hlukové mapy 2022 podle zdroje, 4. 11. 2026",
+  "ČÚZK – výškový model terénu a ZABAGED, 4. 11. 2026",
+  "Česká geologická služba – radonový index podloží 1 : 50 000, 4. 11. 2026",
+  "Metropolitní plán hl. m. Prahy (IPR Praha), znění k 4. 11. 2026",
+  "Územně analytické podklady Prahy a stavební uzávěry, 4. 11. 2026",
+  "Posuzování vlivů na životní prostředí: záměr OV1233, CENIA, 4. 11. 2026",
+  "Správa železnic – leták o stavbě trati 9/2025",
+  "Nabídky domů v Radotíně na realitních portálech, 4. 11. 2026",
+  "Neřešíme kriminalitu, školy, ovzduší a dostupnost."
+ ],
+ "upozorneni": "Report shrnuje veřejně dostupná data a dodané dokumenty k 4. 11. 2026. Není právní ani znalecký posudek a nenahrazuje prověrku advokátem ani technickou prohlídku.",
+ "balicek": "proverka",
+ "cislo": "UKÁZKA",
+ "letecky": "/letecky.jpg"
+}

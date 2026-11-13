@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1e2645">
+<meta name="color-scheme" content="dark">
+<title>Ukázka objednávky | Před koupí</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styl.css?v=13">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/proverit/proverit.css?v=8">
+<style>
+  .ukazka-volby { display: grid; gap: 14px; margin-top: 8px; }
+  @media (min-width: 760px) { .ukazka-volby { grid-template-columns: 1fr 1fr; } }
+  .ukazka-volby .karta h2 { font-size: 1.05rem; margin: 0 0 8px; }
+  .ukazka-volby .karta p { margin: 0 0 14px; color: var(--tlumene-t); }
+  .ukazka-volby .tl { width: 100%; }
+  .ukazka-pozn { color: var(--slabe-t); font-size: .9rem; max-width: 70ch; }
+</style>
+</head>
+<body class="stranka-proverit">
+<!-- Jen na testu (proverka.gratzer.cz): předváděcí průchod pro známé a hodnotitele (Petr 13. 11. 2026). -->
+<div class="pruh-test" style="background:#f0a050;color:#1e2645;font:600 12px/1.7 Montserrat,Arial,sans-serif;text-align:center;padding:3px 16px">Testovací kopie webu predkoupi.cz – slouží jen ke zkouškám</div>
+<header class="hlavicka">
+  <div class="obal lista">
+    <a class="logo" href="/" aria-label="Před koupí – úvod"><b>PŘED KOUPÍ</b><span>prověření bytu a domu</span></a>
+  </div>
+</header>
+<main id="obsah" class="obal">
+  <div class="zahlavi">
+    <span class="stitek">Ukázka</span>
+    <h1>Projděte si objednávku</h1>
+    <p class="podnadpis">Celá cesta zákazníka od zadání adresy po hotový report. Nic se neplatí ani neodesílá, e-mail může být vymyšlený. Průběh je zrychlený na 1–2 minuty (skutečně trvá do 5, u PLUS do 10 minut).</p>
+  </div>
+  <div class="ukazka-volby">
+    <div class="karta ok">
+      <h2>Celá cesta</h2>
+      <p>Přehled zdarma pro rodinný dům Karlická 49 v Radotíně (živá data z veřejných map), pak formulář objednávky, průběh a report. Vyzkoušejte Prověrku PLUS a zadejte jakoukoli cenu – report ji porovná se skutečnými prodeji v okolí.</p>
+      <a class="tl tmave-tl" data-zacit href="/proverit/?q=Karlick%C3%A1%2049%2C%20Praha%2016&amp;predvedeni=1">Začít od adresy</a>
+    </div>
+    <div class="karta ok">
+      <h2>Jen průběh a report</h2>
+      <p>Rovnou obrazovka po zaplacení: průběh prověrky a na konci report v prohlížeči a ke stažení v PDF.</p>
+      <a class="tl tmave-tl" data-zacit href="/objednavka/?t=ukazka-proverka&amp;predvedeni=1">Prověrka (790 Kč)</a>
+      <p></p>
+      <a class="tl tmave-tl" data-zacit href="/objednavka/?t=ukazka-plus&amp;predvedeni=1">Prověrka PLUS (1 290 Kč)</a>
+    </div>
+  </div>
+  <p class="ukazka-pozn">Report je skutečný výstup prověrky domu Karlická 910/49 ze 4. 11. 2026 (bez osobních údajů). V ukázce může být adresa jen tato; pro jinou adresu ukáže přehled zdarma její data, ale report zůstane vzorový. PDF ke stažení je starší verze bez porovnání ceny.</p>
+</main>
+<script>
+  // Každé spuštění začíná od začátku (čas průběhu, zadaná cena, odškrtnuté úkoly).
+  document.querySelectorAll("[data-zacit]").forEach((a) => a.addEventListener("click", () => {
+    try { ["predkoupi-predvedeni", "predkoupi-ochutnavka", "predkoupi-email"].forEach((k) => sessionStorage.removeItem(k));
+          ["ukazka-proverka", "ukazka-plus"].forEach((t) => localStorage.removeItem(`predkoupi-ukoly-${t}`)); } catch { /* bez úložiště */ }
+  }));
+</script>
+</body>
+</html>
