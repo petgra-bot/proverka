@@ -6,8 +6,9 @@
   const KLIC = "predkoupi-predvedeni";
   const ADRESA = "Karlická 910/49, Radotín, 15300 Praha 5";
   const TRVANI_S = { proverka: 70, plus: 100 };           // skutečně do 5 a do 10 minut
-  const VAHY = [2, 15, 20, 25, 25, 13];                     // stejné jako stav.js
-  const FAZE = ["Platba", "Katastr a identifikace", "Povodně, hluk, radon a územní plán", "Právní stav a záměry v okolí", "Report", "Kontrola kvality"];
+  // Stejné kroky a váhy jako server a stav.js (14. 11. 2026: samostatný krok Odhad ceny, v Prověrce zamčený).
+  const FAZE = [["platba", "Platba", 2], ["katastr", "Katastr a identifikace", 15], ["fakta", "Povodně, hluk, radon a územní plán", 20],
+    ["pravni", "Právní stav a záměry v okolí", 20], ["cena", "Odhad ceny z prodejů v katastru", 10], ["report", "Report", 20], ["kontrola", "Kontrola kvality", 13]];
   const NAZEV = { proverka: "Prověrka", plus: "Prověrka PLUS" };
   const CENA = { proverka: 790, plus: 1290 };
   const nacti = () => { try { return JSON.parse(sessionStorage.getItem(KLIC) || "{}"); } catch { return {}; } };
@@ -53,9 +54,13 @@
     }
     if (!s.start) { s.start = Date.now(); uloz(s); }
     const t = (Date.now() - s.start) / 1000, podil = Math.min(1, t / TRVANI_S[bal]);
-    const celkem = VAHY.reduce((a, b) => a + b, 0);
+    const aktivni = FAZE.filter(([k]) => bal === "plus" || k !== "cena");
+    const celkem = aktivni.reduce((a, f) => a + f[2], 0);
     let kum = 0;
-    const faze = FAZE.map((nazev, i) => { kum += VAHY[i]; return { nazev, hotovo: i === 0 || podil >= kum / celkem }; });
+    const faze = FAZE.map(([klic, nazev, v], i) => {
+      if (klic === "cena" && bal !== "plus") return { klic, nazev, hotovo: false, zamceno: true };
+      kum += v; return { klic, nazev, hotovo: i === 0 || podil >= kum / celkem };
+    });
     const hotovo = podil >= 1;
     return json({
       cislo: "UKÁZKA", stav: hotovo ? "hotovo" : "bezi", balicek: NAZEV[bal], cena: CENA[bal], adresa: ADRESA, test: true, faze,
