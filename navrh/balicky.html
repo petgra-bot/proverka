@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Návrh: co obsahuje balíček | Před koupí</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styl.css?v=15">
+<link rel="stylesheet" href="/proverit/proverit.css?v=16">
+<style>
+  .volba { display: flex; gap: 8px; margin: 0 0 18px; flex-wrap: wrap; }
+  .volba button { font: 700 .82rem Montserrat, sans-serif; letter-spacing: .06em; text-transform: uppercase; padding: 10px 16px; min-height: 44px;
+    background: transparent; color: var(--text-t); border: 1px solid rgba(255,255,255,.4); cursor: pointer; }
+  .volba button[aria-pressed="true"] { background: #fff; color: var(--navy); border-color: #fff; }
+  .popis-varianty { color: var(--tlumene-t); max-width: 70ch; margin: 0 0 22px; }
+  .navrh-karta { max-width: 480px; background: #fff; padding: 22px 24px; color: var(--navy); }
+  .navrh-karta h3 { margin: 0 0 14px; }
+  .obj-bal-nazev .obsah { display: inline-flex; align-items: center; gap: 8px; }
+  /* A: ikonka (i) s bublinou */
+  .info-tl { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--navy); background: #fff; color: var(--navy);
+    font: 700 .78rem/1 Georgia, serif; font-style: italic; cursor: pointer; display: inline-grid; place-items: center; padding: 0; flex: none; }
+  .info-tl:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+  .bublina { position: absolute; z-index: 5; left: 12px; right: 12px; margin-top: 8px; background: var(--navy); color: #fff; padding: 14px 16px 12px;
+    box-shadow: 0 8px 28px rgba(0,0,0,.25); font-size: .88rem; text-transform: none; letter-spacing: 0; font-weight: 500; }
+  .bublina::before { content: ""; position: absolute; top: -7px; left: var(--sipka, 120px); border: 7px solid transparent; border-top: 0; border-bottom-color: var(--navy); }
+  .bublina ul, .rozbal ul, .srovnani td ul { margin: 6px 0 0; padding: 0 0 0 18px; }
+  .bublina li, .rozbal li { margin: 3px 0; }
+  .bublina b { color: #fff; }
+  .obj-balicek { position: relative; }
+  /* B: rozbalení pod popisem */
+  .rozbal-tl { font: 600 .84rem Montserrat, sans-serif; color: var(--navy); background: none; border: 0; padding: 6px 0 0; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 3px; display: inline-flex; gap: 6px; align-items: center; }
+  .rozbal-tl::after { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform .2s; }
+  .rozbal-tl[aria-expanded="true"]::after { transform: rotate(-135deg) translateY(-1px); }
+  .rozbal { font-size: .86rem; color: #3a4060; padding-top: 4px; }
+  .rozbal li::marker { color: #2a9d8f; }
+  /* C: porovnání v okně */
+  .srovnat-tl { font: 700 .84rem Montserrat, sans-serif; color: var(--navy); background: none; border: 1px solid var(--linka); padding: 10px 14px; cursor: pointer; width: 100%; margin: 0 0 6px; }
+  dialog.srovnani { border: 0; padding: 0; max-width: 640px; width: calc(100% - 32px); color: var(--navy); }
+  dialog.srovnani::backdrop { background: rgba(14,20,40,.6); }
+  .srovnani header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--linka); }
+  .srovnani header h3 { margin: 0; font-size: 1rem; }
+  .srovnani header button { background: none; border: 0; font-size: 1.6rem; line-height: 1; cursor: pointer; color: var(--navy); min-width: 44px; min-height: 44px; }
+  .srovnani table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  .srovnani th, .srovnani td { padding: 9px 14px; border-bottom: 1px solid var(--linka); text-align: left; vertical-align: top; }
+  .srovnani td.ano, .srovnani td.ne { text-align: center; width: 92px; font-weight: 700; }
+  .srovnani td.ano { color: #1d6b3a; } .srovnani td.ne { color: #a0a6b8; }
+  .srovnani thead th { font-size: .74rem; text-transform: uppercase; letter-spacing: .06em; background: #f1f2f6; }
+  .srovnani thead th.plus { background: var(--navy); color: #fff; }
+  @media (max-width: 520px) { .srovnani td.ano, .srovnani td.ne { width: 64px; } }
+</style>
+</head>
+<body class="stranka-proverit">
+<div style="background:#f0a050;color:#1e2645;font:600 12px/1.7 Montserrat,Arial,sans-serif;text-align:center;padding:3px 16px">Návrh – jen na testu, ke schválení (W12)</div>
+<main class="obal">
+  <div class="zahlavi"><span class="stitek">Návrh</span><h1>Co obsahuje balíček</h1></div>
+  <div class="volba" role="group" aria-label="Varianta">
+    <button type="button" data-v="a" aria-pressed="true">A – ikonka (i)</button>
+    <button type="button" data-v="b" aria-pressed="false">B – rozbalit</button>
+    <button type="button" data-v="c" aria-pressed="false">C – porovnání</button>
+  </div>
+  <p class="popis-varianty" id="popis"></p>
+  <div class="co-dal navrh-karta"><form class="objednat" onsubmit="return false"><h3>Objednat prověrku</h3><div id="balicky"></div></form></div>
+</main>
+<script>
+(() => {
+  const OBSAH = {
+    proverka: ["<b>Aktuální výpis z katastru</b> – zástavy, břemena, exekuce, plomby, předkupní práva",
+               "<b>Prověření vlastníků</b> v insolvenčním rejstříku",
+               "<b>Územní plán a stavby v okolí</b> – Metropolitní plán, záměry, EIA, uzávěry",
+               "<b>Povodně, radon a hluk</b> u nejhlučnější fasády ve dne i v noci",
+               "Vlastník pozemku pod domem, elektrická vedení, nežádoucí zařízení",
+               "<b>Verdikt a úkoly před koupí na míru</b> – co ověřit, s kým a kdy",
+               "Report v PDF i v prohlížeči <b>do 5 minut</b>"],
+    plus: ["Vše z Prověrky",
+           "<b>Odhad ceny ze skutečných prodejů</b> v domě i v sousedních domech do 300 m (katastr), přepočtený na dnešní ceny",
+           "<b>Tři čísla k vyjednávání</b> – dobrá koupě, férová cena, horní hranice – a graf cen",
+           "<b>Prověření vlastníků v evidenci exekucí</b>",
+           "<b>Podrobný report</b> – tabulka prodejů, mapy povodní a hluku, všechna zjištění se zdroji, daň z nemovitosti",
+           "Report <b>do 10 minut</b>"],
+  };
+  const RADKY = [["Aktuální výpis z katastru a právní stav", 1, 1], ["Vlastníci v insolvenčním rejstříku", 1, 1], ["Vlastníci v evidenci exekucí", 0, 1],
+    ["Územní plán, stavby v okolí, EIA", 1, 1], ["Povodně, radon, hluk u fasády", 1, 1], ["Verdikt a úkoly na míru", 1, 1],
+    ["Odhad ceny ze skutečných prodejů (dům i okolí)", 0, 1], ["Tři čísla k vyjednávání a graf", 0, 1], ["Podrobný report s mapami a tabulkou prodejů", 0, 1],
+    ["Report hotový", "do 5 min", "do 10 min"]];
+  const bal = (v, nazev, cena, popis, extra) => `<label class="obj-balicek"><input type="radio" name="balicek" value="${v}"${v === "proverka" ? " checked" : ""}>
+    <span class="obj-bal-text"><span class="obj-bal-nazev"><span class="obsah"><b>${nazev}</b>${extra.ikona || ""}</span><b>${cena}</b></span>
+    <span class="obj-bal-popis">${popis}</span>${extra.pod || ""}</span>${extra.bublina || ""}</label>`;
+  const P = ["proverka", "Prověrka", "790 Kč", "Právní stav z katastru včetně vlastníků, územní plán a stavby v okolí, verdikt a úkoly. Do 5 minut."];
+  const L = ["plus", "Prověrka PLUS", "1 390 Kč", "Navíc odhad ceny ze skutečných prodejů v domě a okolí, tři čísla k vyjednávání a podrobný report. Do 10 minut."];
+  const seznam = (k) => `<ul>${OBSAH[k].map((x) => `<li>${x}</li>`).join("")}</ul>`;
+  const VARIANTY = {
+    a: { popis: "Ikonka (i) vedle názvu. Klepnutí otevře tmavou bublinu se seznamem v bodech; zavře se klepnutím vedle, klávesou Esc nebo znovu na ikonku. Nejméně místa, ale obsah je skrytý.",
+         html: () => [P, L].map(([v, n, c, p]) => bal(v, n, c, p, { ikona: `<button type="button" class="info-tl" aria-expanded="false" aria-controls="b-${v}" aria-label="Co obsahuje ${n}">i</button>`,
+           bublina: `<div class="bublina" id="b-${v}" role="dialog" aria-label="Co obsahuje ${n}" hidden><b>${n} obsahuje:</b>${seznam(v)}</div>` })).join("") },
+    b: { popis: "Pod popisem odkaz „Co přesně dostanu“, který rozbalí seznam přímo v kartě. Nic nepřekrývá, dobře funguje na mobilu; karta se při rozbalení prodlouží.",
+         html: () => [P, L].map(([v, n, c, p]) => bal(v, n, c, p, { pod: `<button type="button" class="rozbal-tl" aria-expanded="false" aria-controls="r-${v}">Co přesně dostanu</button><div class="rozbal" id="r-${v}" hidden>${seznam(v)}</div>` })).join("") },
+    c: { popis: "Pod balíčky tlačítko „Porovnat balíčky“, které otevře okno s tabulkou Prověrka × PLUS řádek po řádku. Nejpřehlednější rozdíl mezi balíčky, ale o krok víc.",
+         html: () => [P, L].map(([v, n, c, p]) => bal(v, n, c, p, {})).join("") + `<button type="button" class="srovnat-tl">Porovnat balíčky – co přesně dostanu</button>
+           <dialog class="srovnani" aria-label="Porovnání balíčků"><header><h3>Co dostanete</h3><button type="button" aria-label="Zavřít">×</button></header>
+           <table><thead><tr><th></th><th>Prověrka<br>790 Kč</th><th class="plus">PLUS<br>1 390 Kč</th></tr></thead><tbody>
+           ${RADKY.map(([t, a, b]) => `<tr><td>${t}</td>${[a, b].map((x) => typeof x === "string" ? `<td class="ano">${x}</td>` : x ? `<td class="ano">✓</td>` : `<td class="ne">–</td>`).join("")}</tr>`).join("")}
+           </tbody></table></dialog>` },
+  };
+  const box = document.getElementById("balicky");
+  const ukaz = (v) => {
+    box.innerHTML = VARIANTY[v].html();
+    document.getElementById("popis").textContent = VARIANTY[v].popis;
+    document.querySelectorAll(".volba button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === v)));
+    // A: bublina
+    box.querySelectorAll(".info-tl").forEach((tl) => tl.addEventListener("click", (e) => {
+      e.preventDefault(); e.stopPropagation();
+      const b = document.getElementById(tl.getAttribute("aria-controls")), otevrit = b.hidden;
+      box.querySelectorAll(".bublina").forEach((x) => { x.hidden = true; }); box.querySelectorAll(".info-tl").forEach((x) => x.setAttribute("aria-expanded", "false"));
+      if (otevrit) { b.hidden = false; tl.setAttribute("aria-expanded", "true"); b.style.setProperty("--sipka", `${tl.offsetLeft - 4}px`); }
+    }));
+    // B: rozbalení
+    box.querySelectorAll(".rozbal-tl").forEach((tl) => tl.addEventListener("click", (e) => {
+      e.preventDefault(); const r = document.getElementById(tl.getAttribute("aria-controls"));
+      r.hidden = !r.hidden; tl.setAttribute("aria-expanded", String(!r.hidden)); tl.textContent = r.hidden ? "Co přesně dostanu" : "Skrýt";
+    }));
+    // C: okno
+    const d = box.querySelector("dialog");
+    box.querySelector(".srovnat-tl")?.addEventListener("click", () => d.showModal());
+    d?.querySelector("header button").addEventListener("click", () => d.close());
+    d?.addEventListener("click", (e) => { if (e.target === d) d.close(); });
+  };
+  document.addEventListener("click", (e) => { if (!e.target.closest(".bublina")) { box.querySelectorAll(".bublina").forEach((x) => { x.hidden = true; }); box.querySelectorAll(".info-tl").forEach((x) => x.setAttribute("aria-expanded", "false")); } });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") box.querySelectorAll(".bublina").forEach((x) => { x.hidden = true; }); });
+  document.querySelectorAll(".volba button").forEach((b) => b.addEventListener("click", () => ukaz(b.dataset.v)));
+  ukaz(new URLSearchParams(location.search).get("v") || "a");
+})();
+</script>
+</body>
+</html>
