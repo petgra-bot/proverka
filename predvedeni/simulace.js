@@ -10,7 +10,7 @@
   const FAZE = [["platba", "Platba", 2], ["katastr", "Katastr a identifikace", 15], ["fakta", "Povodně, hluk, radon a územní plán", 20],
     ["pravni", "Právní stav a záměry v okolí", 20], ["cena", "Odhad ceny z prodejů v katastru", 10], ["report", "Report", 20], ["kontrola", "Kontrola kvality", 13]];
   const NAZEV = { proverka: "Prověrka", plus: "Prověrka PLUS" };
-  const CENA = { proverka: 790, plus: 1290 };
+  const CENA = { proverka: 790, plus: 1390 };
   const nacti = () => { try { return JSON.parse(sessionStorage.getItem(KLIC) || "{}"); } catch { return {}; } };
   const uloz = (s) => { try { sessionStorage.setItem(KLIC, JSON.stringify(s)); } catch { /* jde i bez */ } };
   const json = (d, status = 200) => new Response(JSON.stringify(d), { status, headers: { "Content-Type": "application/json" } });
