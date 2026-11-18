@@ -13,8 +13,8 @@
     "hodnota": "331"
    },
    {
-    "nazev": "Výpis LV ke dni",
-    "hodnota": "24. 10. 2026"
+    "nazev": "Výpis z katastru",
+    "hodnota": "stažen dnes v 14:32"
    },
    {
     "nazev": "Typ",
@@ -42,9 +42,14 @@
  },
  "semafor": [
   {
-   "oblast": "Právní stav",
+   "oblast": "Zápisy v katastru",
    "barva": "cervena",
    "text": "Doživotní věcné břemeno užívání na domě i zahradě; jiná zástava ani exekuce na výpisu není."
+  },
+  {
+   "oblast": "Vlastník",
+   "barva": "zelena",
+   "text": "Insolvence: nenalezena · exekuce: v Prověrce PLUS"
   },
   {
    "oblast": "Územní plán a okolí",
@@ -197,5 +202,31 @@
  "upozorneni": "Report shrnuje veřejně dostupná data a dodané dokumenty k 4. 11. 2026. Není právní ani znalecký posudek a nenahrazuje prověrku advokátem ani technickou prohlídku.",
  "balicek": "proverka",
  "cislo": "UKÁZKA",
- "letecky": "/letecky.jpg"
+ "letecky": "/letecky.jpg",
+ "v_poradku": [
+  "Vlastník není v insolvenci",
+  "Na domě není zástava ani exekuce",
+  "Bez plomb a probíhajících řízení v katastru",
+  "Dům mimo stoletou vodu, hranice 42 m",
+  "Jediný vlastník, bez spoluvlastníků"
+ ],
+ "proverili": {
+  "zdroju": 13,
+  "dotazu": 193,
+  "nazvy": [
+   "katastr nemovitostí (list vlastnictví)",
+   "insolvenční rejstřík (1 vlastník)",
+   "záplavová území",
+   "Metropolitní plán a územní plán Prahy",
+   "záměry v územně analytických podkladech",
+   "technická infrastruktura (sítě)",
+   "hlukové mapy Prahy",
+   "objekty s nebezpečnými látkami",
+   "strategické hlukové mapy (MZ ČR)",
+   "RÚIAN (adresy a budovy)",
+   "mapy ČÚZK",
+   "radonová mapa",
+   "registr záměrů EIA"
+  ]
+ }
 }
