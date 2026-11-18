@@ -14,7 +14,7 @@
    },
    {
     "nazev": "Výpis z katastru",
-    "hodnota": "stažen dnes v 14:32"
+    "hodnota": "stažen dnes ve 14:32"
    },
    {
     "nazev": "Typ",
@@ -287,27 +287,26 @@
   "Vlastník nemá probíhající exekuci",
   "Na domě není zástava ani exekuce",
   "Bez plomb a probíhajících řízení v katastru",
-  "Dům mimo stoletou vodu, hranice 42 m",
-  "Jediný vlastník, bez spoluvlastníků"
+  "Dům mimo stoletou vodu, hranice 42 m"
  ],
  "proverili": {
   "zdroju": 15,
   "dotazu": 193,
   "nazvy": [
-   "katastr nemovitostí (list vlastnictví)",
-   "insolvenční rejstřík (1 vlastník)",
-   "centrální evidence exekucí",
+   "katastr nemovitostí",
+   "insolvenční rejstřík",
+   "evidence exekucí",
    "záplavová území",
-   "Metropolitní plán a územní plán Prahy",
-   "záměry v územně analytických podkladech",
-   "technická infrastruktura (sítě)",
+   "Metropolitní plán",
+   "záměry v okolí",
+   "sítě",
    "hlukové mapy Prahy",
-   "objekty s nebezpečnými látkami",
-   "strategické hlukové mapy (MZ ČR)",
-   "RÚIAN (adresy a budovy)",
+   "nebezpečné látky",
+   "hlukové mapy MZ ČR",
+   "RÚIAN",
    "mapy ČÚZK",
    "radonová mapa",
-   "registr záměrů EIA",
+   "registr EIA",
    "prodeje v katastru"
   ]
  }
