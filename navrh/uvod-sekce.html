@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Návrh: sekce úvodní stránky a průvodce | Před koupí</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styl.css?v=19">
+<style>
+.navrh-stitek { background: #f0a050; color: #1e2645; font: 700 13px/1 Montserrat, sans-serif; letter-spacing: .08em; text-transform: uppercase; padding: 10px 16px; }
+.navrh-pozn { max-width: 70ch; color: var(--tlumene); font-size: .875rem; margin: 12px 0 0; }
+/* Varianta A – karty rizik s odkazem na průvodce + 4 kroky v řadě */
+.a-karty { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--linka); background: var(--bila); }
+.a-karty li { padding: 28px 26px 26px; display: flex; flex-direction: column; }
+.a-karty li + li { border-left: 1px solid var(--linka); }
+.a-karty .zdroj { font-size: .6875rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--tlumene); }
+.a-karty h3 { margin-top: 14px; font-size: 1.125rem; text-transform: uppercase; letter-spacing: .01em; }
+.a-karty p { margin-top: 10px; color: var(--tlumene); font-size: .9375rem; flex: 1; }
+.a-karty a { margin-top: 18px; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); }
+.a-hlava { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: end; margin-bottom: 32px; }
+.a-hlava p { color: var(--tlumene); font-size: 1rem; max-width: 46ch; }
+.a-kroky { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--navy); }
+.a-kroky li { padding: 22px 22px 0 0; }
+.a-kroky li + li { padding-left: 22px; border-left: 1px solid var(--linka); }
+.a-kroky .c { font-size: 2.5rem; font-weight: 300; color: #8a90a6; line-height: 1; display: block; margin-bottom: 14px; }
+.a-kroky p { margin-top: 6px; font-size: .875rem; color: var(--tlumene); }
+/* Varianta B – riziko vlevo velké, kroky v tmavém pruhu */
+.b-rizika { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+.b-seznam { list-style: none; margin: 0; padding: 0; }
+.b-seznam li { display: grid; grid-template-columns: 1fr auto; gap: 6px 24px; padding: 22px 0; border-top: 1px solid var(--linka); }
+.b-seznam li:last-child { border-bottom: 1px solid var(--linka); }
+.b-seznam h3 { font-size: 1.0625rem; text-transform: uppercase; }
+.b-seznam p { grid-column: 1; color: var(--tlumene); font-size: .9375rem; }
+.b-seznam a { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); white-space: nowrap; }
+.b-kroky { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+.b-kroky li { padding: 4px 24px 0; border-left: 1px solid var(--linka-tmava); }
+.b-kroky li:first-child { padding-left: 0; border-left: 0; }
+.b-kroky .c { font-size: 3rem; font-weight: 800; line-height: 1; color: rgba(255,255,255,.22); display: block; margin-bottom: 16px; }
+.b-kroky p { margin-top: 6px; color: var(--na-tmave); font-size: .875rem; }
+/* Průvodce na úvodní stránce */
+.p-karty { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.p-karty a { display: flex; flex-direction: column; background: var(--bila); border: 1px solid var(--linka); padding: 26px 24px 24px; color: var(--navy); text-decoration: none; transition: border-color .15s; }
+.p-karty a:hover { border-color: var(--navy); }
+.p-karty .stitek { margin-bottom: 14px; }
+.p-karty h3 { font-size: 1.0625rem; line-height: 1.3; }
+.p-karty p { margin-top: 10px; color: var(--tlumene); font-size: .875rem; flex: 1; }
+.p-karty .cist { margin-top: 18px; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+@media (max-width: 860px) {
+  .a-karty, .p-karty { grid-template-columns: 1fr; }
+  .a-karty li + li { border-left: 0; border-top: 1px solid var(--linka); }
+  .a-hlava, .b-rizika { grid-template-columns: 1fr; }
+  .a-kroky, .b-kroky { grid-template-columns: 1fr 1fr; row-gap: 28px; }
+  .a-kroky li:nth-child(3), .b-kroky li:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 520px) {
+  .a-kroky, .b-kroky { grid-template-columns: 1fr; }
+  .a-kroky li + li, .b-kroky li + li { padding-left: 0; border-left: 0; }
+  .b-seznam li { grid-template-columns: 1fr; }
+  .b-seznam a { grid-column: 1; grid-row: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NYNÍ ================= -->
+<div class="navrh-stitek" id="nyni">Nyní – pro srovnání</div>
+<section aria-label="Nyní">
+  <div class="obal">
+    <div class="hlava">
+      <div><span class="stitek">Proč prověřovat</span><h2>Co vám inzerát neřekne</h2></div>
+      <p>Před koupí to najde z&nbsp;úředních dat dřív, než zaplatíte rezervaci.</p>
+    </div>
+    <ul class="priklady">
+      <li><h3>Doživotní břemeno</h3><p>V&nbsp;bytě nebo domě smí dál bydlet někdo jiný a&nbsp;vy se nenastěhujete.</p></li>
+      <li><h3>Exekuce majitele</h3><p>Prodej bez souhlasu exekutora je neplatný a&nbsp;kupní cena může být ztracená.</p></li>
+      <li><h3>Stavba za plotem</h3><p>Nová silnice, trať nebo dům podle územního plánu – hluk a&nbsp;prach na roky.</p></li>
+    </ul>
+    <p class="dale"><a href="#">Co všechno prověříme</a></p>
+  </div>
+</section>
+
+<!-- ================= VARIANTA A ================= -->
+<div class="navrh-stitek" id="a">Varianta A – karty rizik se zdrojem a odkazem na průvodce, 4 kroky v řadě</div>
+<section class="seda" aria-label="Varianta A – rizika">
+  <div class="obal">
+    <div class="a-hlava">
+      <div><span class="stitek">Proč prověřovat</span><h2 style="margin-top:12px">Co vám inzerát neřekne</h2></div>
+      <p>Tři rizika, která v&nbsp;inzerátu nenajdete. Všechna jsou v&nbsp;úředních datech a&nbsp;Před koupí je najde dřív, než zaplatíte rezervaci.</p>
+    </div>
+    <ul class="a-karty">
+      <li><span class="zdroj">Katastr nemovitostí</span><h3>Doživotní břemeno</h3><p>V&nbsp;bytě nebo domě smí dál bydlet někdo jiný a&nbsp;vy se nenastěhujete.</p><a href="#">Jak na věcná břemena →</a></li>
+      <li><span class="zdroj">Insolvenční rejstřík a&nbsp;exekuce</span><h3>Exekuce majitele</h3><p>Prodej bez souhlasu exekutora je neplatný a&nbsp;kupní cena může být ztracená.</p><a href="#">Jak prověřit prodávajícího →</a></li>
+      <li><span class="zdroj">Územní plán a&nbsp;záměry</span><h3>Stavba za plotem</h3><p>Nová silnice, trať nebo dům podle územního plánu – hluk a&nbsp;prach na roky.</p><a href="#">Jak číst územní plán →</a></li>
+    </ul>
+  </div>
+</section>
+<section id="postup-a" aria-label="Varianta A – postup">
+  <div class="obal">
+    <div class="a-hlava">
+      <div><span class="stitek">Jak to funguje</span><h2 style="margin-top:12px">Od odkazu k&nbsp;reportu</h2></div>
+      <p>Nic nevyplňujete, co umíme zjistit sami.</p>
+    </div>
+    <ol class="a-kroky">
+      <li><span class="c" aria-hidden="true">01</span><h3>Vložíte odkaz nebo adresu</h3><p>Inzerát z&nbsp;realitního serveru, nebo jen ulici a&nbsp;číslo.</p></li>
+      <li><span class="c" aria-hidden="true">02</span><h3>Přehled zdarma</h3><p>Do pár vteřin povodně, hluk, radon a&nbsp;územní plán. Bez registrace.</p></li>
+      <li><span class="c" aria-hidden="true">03</span><h3>Objednáte Prověrku</h3><p>E-mail a&nbsp;platba. U&nbsp;bytu se zeptáme nanejvýš na plochu.</p></li>
+      <li><span class="c" aria-hidden="true">04</span><h3>Report do 5&nbsp;minut</h3><p>Verdikt, rizika a&nbsp;úkoly v&nbsp;PDF e-mailem i&nbsp;v&nbsp;prohlížeči.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= VARIANTA B ================= -->
+<div class="navrh-stitek" id="b">Varianta B – rizika jako seznam vedle nadpisu, kroky v tmavém pruhu</div>
+<section aria-label="Varianta B – rizika">
+  <div class="obal b-rizika">
+    <div>
+      <span class="stitek">Proč prověřovat</span>
+      <h2 style="margin-top:12px">Co vám inzerát neřekne</h2>
+      <p class="uvodni-text" style="margin-top:16px;color:var(--tlumene)">Před koupí to najde z&nbsp;úředních dat dřív, než zaplatíte rezervaci.</p>
+      <p style="margin-top:24px"><a class="tl tmave-tl" href="#">Prověřit zdarma</a></p>
+    </div>
+    <ul class="b-seznam">
+      <li><h3>Doživotní břemeno</h3><p>V&nbsp;bytě nebo domě smí dál bydlet někdo jiný a&nbsp;vy se nenastěhujete.</p><a href="#">Průvodce →</a></li>
+      <li><h3>Exekuce majitele</h3><p>Prodej bez souhlasu exekutora je neplatný a&nbsp;kupní cena může být ztracená.</p><a href="#">Průvodce →</a></li>
+      <li><h3>Stavba za plotem</h3><p>Nová silnice, trať nebo dům podle územního plánu – hluk a&nbsp;prach na roky.</p><a href="#">Průvodce →</a></li>
+    </ul>
+  </div>
+</section>
+<section class="tmave" aria-label="Varianta B – postup">
+  <div class="obal">
+    <span class="stitek">Jak to funguje</span>
+    <h2 style="margin:12px 0 40px">Od odkazu k&nbsp;reportu</h2>
+    <ol class="b-kroky">
+      <li><span class="c" aria-hidden="true">01</span><h3>Vložíte odkaz nebo adresu</h3><p>Inzerát z&nbsp;realitního serveru, nebo jen ulici a&nbsp;číslo.</p></li>
+      <li><span class="c" aria-hidden="true">02</span><h3>Přehled zdarma</h3><p>Do pár vteřin povodně, hluk, radon a&nbsp;územní plán.</p></li>
+      <li><span class="c" aria-hidden="true">03</span><h3>Objednáte Prověrku</h3><p>E-mail a&nbsp;platba. U&nbsp;bytu nanejvýš plocha.</p></li>
+      <li><span class="c" aria-hidden="true">04</span><h3>Report do 5&nbsp;minut</h3><p>Verdikt, rizika a&nbsp;úkoly e-mailem.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= PRŮVODCE ================= -->
+<div class="navrh-stitek" id="pruvodce">Průvodce na úvodní stránce – nová sekce (před ceníkem) + položka „Průvodce“ v hlavním menu</div>
+<section class="seda" aria-label="Průvodce koupí">
+  <div class="obal">
+    <div class="a-hlava">
+      <div><span class="stitek">Průvodce koupí</span><h2 style="margin-top:12px">Prověřte si to i&nbsp;sami</h2></div>
+      <p>Co hledat v&nbsp;katastru, u&nbsp;prodávajícího a&nbsp;v&nbsp;okolí. Krok za krokem, s&nbsp;odkazy na bezplatné úřední zdroje.</p>
+    </div>
+    <div class="p-karty">
+      <a href="#"><span class="stitek">Byt</span><h3>Kontrola bytu před koupí: co prověřit a&nbsp;kde to najdete</h3><p>Výpis z&nbsp;katastru, prodávající, SVJ a&nbsp;fond oprav, územní plán, hluk, povodně a&nbsp;cena.</p><span class="cist">Číst průvodce →</span></a>
+      <a href="#"><span class="stitek">Rodinný dům</span><h3>Kontrola rodinného domu před koupí</h3><p>Parcely a&nbsp;přístup, nezapsané stavby, technický stav, ochranná pásma a&nbsp;cena.</p><span class="cist">Číst průvodce →</span></a>
+      <a href="#"><span class="stitek">Katastr</span><h3>Věcné břemeno při koupi: co přechází na vás a&nbsp;jak se ruší</h3><p>Doživotní užívání, cesta a&nbsp;sítě. Kdy raději nepodepisovat.</p><span class="cist">Číst průvodce →</span></a>
+    </div>
+    <p class="dale" style="margin-top:28px"><a href="#">Všichni průvodci</a></p>
+  </div>
+</section>
+
+</body>
+</html>
