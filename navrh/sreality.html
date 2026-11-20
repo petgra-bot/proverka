@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Návrh: adresa z inzerátu Sreality | Před koupí</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styl.css?v=22">
+<style>
+body { background: #e9ebf1; }
+.navrh { max-width: 1240px; margin: 0 auto; padding: 32px 16px 64px; }
+.navrh > h1 { font-size: 1.75rem; }
+.var { margin-top: 48px; }
+.var h2 { font-size: 1.25rem; }
+.var .popis { max-width: 80ch; color: var(--tlumene); font-size: .9375rem; margin-top: 8px; }
+.radek { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 20px; align-items: flex-start; }
+.tel { width: 360px; border: 10px solid #111; border-radius: 34px; overflow: hidden; background: var(--bila); box-shadow: 0 10px 30px rgba(0,0,0,.15); }
+.tel .lista-t { height: 26px; background: var(--navy); }
+.tel .obsah { min-height: 600px; }
+.krok-c { font-size: .6875rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--tlumene); margin-bottom: 8px; }
+.tmavy { background: var(--navy); color: var(--bila); padding: 22px 18px 26px; }
+.tmavy .stitek { color: var(--na-tmave-slabe); }
+.tmavy h3 { font-size: 1.375rem; text-transform: uppercase; margin: 8px 0 14px; line-height: 1.15; }
+.pole-m { border: 1px solid rgba(255,255,255,.45); padding: 14px 14px; font-size: .875rem; color: rgba(255,255,255,.85); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.tl-m { display: flex; align-items: center; justify-content: center; min-height: 52px; font-weight: 700; font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; margin-top: 10px; border: 1px solid transparent; }
+.tl-b { background: var(--bila); color: var(--navy); }
+.tl-n { background: var(--navy); color: var(--bila); }
+.tl-o { background: transparent; color: var(--navy); border-color: var(--navy); }
+.tl-ob { background: transparent; color: var(--bila); border-color: rgba(255,255,255,.5); }
+.bily { padding: 20px 18px; }
+.karta-m { border: 1px solid var(--linka); padding: 16px; margin-top: 12px; }
+.karta-m h4 { font-size: .9375rem; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; }
+.karta-m p { font-size: .8125rem; color: var(--tlumene); margin-top: 6px; }
+.snimek { border: 1px dashed #9aa0b5; background: var(--svetla); padding: 22px 12px; text-align: center; font-size: .8125rem; color: var(--tlumene); margin-top: 12px; }
+.snimek b { display: block; font-size: 1rem; color: var(--navy); margin-bottom: 4px; }
+.snimky-n { display: flex; gap: 8px; margin-top: 12px; }
+.snimky-n div { width: 72px; height: 120px; background: linear-gradient(#cfd3df 0 22%, #fff 22% 30%, #e1e4ec 30% 40%, #fff 40% 46%, #e1e4ec 46% 100%); border: 1px solid var(--linka); }
+.ok { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--linka); font-size: .8125rem; }
+.ok:first-child { border-top: 0; }
+.ok .z { width: 18px; height: 18px; border-radius: 50%; background: #2e8b57; color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; flex: none; margin-top: 1px; }
+.ok .s { width: 18px; height: 18px; border-radius: 50%; background: #b35400; color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; flex: none; margin-top: 1px; }
+.cipy { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.cipy span { border: 1px solid var(--navy); padding: 8px 12px; font-size: .8125rem; font-weight: 600; }
+.cipy span.vyb { background: var(--navy); color: var(--bila); }
+.mapa { height: 190px; background: #c9cfbf linear-gradient(135deg, rgba(255,255,255,.25) 25%, transparent 25% 50%, rgba(255,255,255,.25) 50% 75%, transparent 75%) 0 0/28px 28px; position: relative; margin-top: 12px; }
+.mapa i { position: absolute; width: 26px; height: 26px; border: 2px solid #fff; background: rgba(30,38,69,.85); color: #fff; font-style: normal; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.zalozky { display: flex; border-bottom: 1px solid rgba(255,255,255,.3); margin-bottom: 14px; }
+.zalozky span { flex: 1; text-align: center; padding: 10px 0; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--na-tmave-slabe); }
+.zalozky span.akt { color: var(--bila); border-bottom: 2px solid var(--bila); }
+.text-pole { border: 1px solid rgba(255,255,255,.45); min-height: 120px; padding: 12px; font-size: .8125rem; color: rgba(255,255,255,.6); }
+.pc { flex: 1; min-width: 480px; background: var(--bila); border: 1px solid var(--linka); box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+.pc .tmavy { padding: 36px 40px 40px; }
+.pc .pole-pc { display: flex; border: 1px solid rgba(255,255,255,.45); }
+.pc .pole-pc div { flex: 1; padding: 16px; font-size: .9375rem; color: rgba(255,255,255,.85); }
+.pc .pole-pc span { background: var(--bila); color: var(--navy); padding: 16px 22px; font-weight: 700; font-size: .8125rem; letter-spacing: .08em; text-transform: uppercase; }
+.pc .drop { margin-top: 14px; border: 1px dashed rgba(255,255,255,.5); padding: 18px; text-align: center; font-size: .875rem; color: var(--na-tmave); }
+.hodnoceni { margin-top: 14px; font-size: .8125rem; color: var(--text); max-width: 80ch; }
+.hodnoceni b { font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="navrh">
+<span class="stitek">Návrh ke schválení · 20. 11. 2026</span>
+<h1 style="margin-top:8px">Adresa z inzerátu Sreality</h1>
+<p class="popis" style="max-width:80ch;color:var(--tlumene);margin-top:10px">Sreality nám adresu přečíst nedovolí (robots.txt). Klient ji ale má před očima. Varianty se liší tím, co klient udělá po vložení odkazu ze Sreality. Všechny dál fungují i s adresou nebo odkazem z jiného portálu. Ukázky jsou statické, bez funkce.</p>
+
+<!-- A -->
+<section class="var">
+<h2>A · Snímek obrazovky (doporučuji pro mobil)</h2>
+<p class="popis">Po vložení odkazu ze Sreality nabídneme jediný krok: „Pošlete snímek inzerátu“. Na mobilu klient udělá snímek v aplikaci Sreality a vybere ho z galerie (1–3 snímky). AI z nich přečte ulici, číslo, plochu, patro, cenu a pozemek a my dům najdeme v katastru. Na počítači jde snímek vložit Ctrl+V nebo přetáhnout.</p>
+<div class="radek">
+  <div class="tel"><div class="lista-t"></div><div class="obsah">
+    <div class="tmavy"><span class="stitek">Krok 1</span><h3>Prověření bytu a domu před koupí</h3>
+      <div class="pole-m">sreality.cz/detail/prodej/byt/2+kk/praha-zizkov-…</div><div class="tl-m tl-b">Prověřit zdarma</div></div>
+    <div class="bily"><div class="krok-c">Krok 2</div>
+      <div class="karta-m"><h4>Pošlete snímek inzerátu</h4><p>Sreality nám adresu neprozradí. V aplikaci nebo prohlížeči udělejte snímek obrazovky s popisem inzerátu a vyberte ho tady. Stačí jeden, víc pomůže.</p>
+        <div class="tl-m tl-n">Vybrat snímek z galerie</div>
+        <div class="tl-m tl-o">Napsat adresu ručně</div></div>
+      <p style="font-size:.75rem;color:var(--tlumene);margin-top:10px">Ze snímku čteme jen údaje o nemovitosti, snímek po zpracování mažeme.</p>
+    </div></div></div>
+  <div class="tel"><div class="lista-t"></div><div class="obsah">
+    <div class="bily"><div class="krok-c">Krok 3 · za 5–10 s</div>
+      <div class="snimky-n"><div></div><div></div></div>
+      <div class="karta-m"><h4>Ze snímku jsme zjistili</h4>
+        <div class="ok"><span class="z">✓</span><div><b>Byt 2+kk, 54 m², 3. patro</b></div></div>
+        <div class="ok"><span class="z">✓</span><div><b>Ulice Seifertova, Praha 3</b> · číslo domu v inzerátu není</div></div>
+        <div class="ok"><span class="s">?</span><div>Na ulici sedí podle plochy a patra <b>2 domy</b> – vyberte na mapě</div></div></div>
+      <div class="mapa"><i style="left:90px;top:60px">1</i><i style="left:190px;top:110px">2</i></div>
+      <div class="tl-m tl-n">Dům č. 1 – Seifertova 512/18</div>
+    </div></div></div>
+  <div class="pc"><div class="tmavy"><span class="stitek">Počítač</span><h3 style="font-size:1.75rem;text-transform:uppercase;margin:10px 0 18px">Prověření bytu a domu před koupí</h3>
+    <div class="pole-pc"><div>sreality.cz/detail/prodej/byt/2+kk/praha-zizkov-seifertova/…</div><span>Prověřit zdarma</span></div>
+    <div class="drop"><b>Sreality nám adresu neprozradí.</b> Vložte sem snímek inzerátu (Ctrl+V) nebo ho přetáhněte. <u>Vybrat soubor</u> · <u>Napsat adresu</u></div></div>
+    <div class="bily" style="padding:24px 40px"><p class="popis" style="margin:0">Na počítači se pole pro snímek ukáže hned pod odkazem, bez dalšího kroku.</p></div></div>
+</div>
+<p class="hodnoceni"><b>Plus:</b> nejméně psaní a funguje i bez čísla domu v inzerátu (doplní plocha, patro, pozemek). <b>Minus:</b> klient musí umět udělat snímek; cca 0,01–0,03 USD za zpracování snímku AI.</p>
+</section>
+
+<!-- B -->
+<section class="var">
+<h2>B · Vložit text inzerátu</h2>
+<p class="popis">Místo snímku klient zkopíruje popis inzerátu (podržet prst → Vybrat vše → Kopírovat) a vloží ho do pole. Levnější a rychlejší než snímek, ale na mobilu je kopírování dlouhého textu z aplikace Sreality nepohodlné a aplikace ho občas nedovolí.</p>
+<div class="radek">
+  <div class="tel"><div class="lista-t"></div><div class="obsah">
+    <div class="bily"><div class="krok-c">Krok 2</div>
+      <div class="karta-m"><h4>Vložte popis inzerátu</h4><p>Zkopírujte z inzerátu nadpis a popis a vložte je sem. Najdeme v nich adresu, plochu a patro.</p>
+        <div style="border:1px solid var(--linka);min-height:150px;padding:12px;margin-top:10px;font-size:.8125rem;color:var(--tlumene)">Nabízíme k prodeji světlý byt 2+kk o výměře 54 m² ve 3. patře cihlového domu v ulici Seifertova…</div>
+        <div class="tl-m tl-n">Najít dům</div>
+        <div class="tl-m tl-o">Poslat raději snímek</div></div>
+    </div></div></div>
+</div>
+<p class="hodnoceni"><b>Plus:</b> žádný obrázek, levné. <b>Minus:</b> na mobilu nejvíc práce; popis často adresu neobsahuje a údaje nahoře v inzerátu (plocha, patro) se nezkopírují.</p>
+</section>
+
+<!-- C -->
+<section class="var">
+<h2>C · Bez snímku: ulice z odkazu + dvě rychlé otázky</h2>
+<p class="popis">Z odkazu máme ulici a dispozici. Zeptáme se jen na to, co klient vidí v inzerátu nahoře, přes tlačítka bez psaní (plocha a patro, u domu pozemek), a domy na ulici seřadíme podle shody s katastrem. Klient pak vybere dům na mapě. Dnes to umíme bez otázek – otázky zúží výběr.</p>
+<div class="radek">
+  <div class="tel"><div class="lista-t"></div><div class="obsah">
+    <div class="bily"><div class="krok-c">Krok 2 · Seifertova, Praha 3 · byt 2+kk</div>
+      <div class="karta-m"><h4>Kolik má byt metrů?</h4><p>Najdete v inzerátu nahoře.</p>
+        <div style="border:1px solid var(--navy);padding:14px;margin-top:10px;font-size:1rem">54 m²</div></div>
+      <div class="karta-m"><h4>Ve kterém patře?</h4>
+        <div class="cipy"><span>přízemí</span><span>1.</span><span>2.</span><span class="vyb">3.</span><span>4.</span><span>5.+</span></div></div>
+      <div class="tl-m tl-n">Najít dům</div>
+    </div></div></div>
+  <div class="tel"><div class="lista-t"></div><div class="obsah">
+    <div class="bily"><div class="krok-c">Krok 3</div>
+      <div class="karta-m"><h4>Který dům to je?</h4><p>Na ulici je 34 domů. Podle plochy a patra sedí nejlépe tyto tři.</p></div>
+      <div class="mapa"><i style="left:60px;top:40px">1</i><i style="left:150px;top:100px">2</i><i style="left:240px;top:70px">3</i></div>
+      <div class="tl-m tl-n">1 · Seifertova 512/18</div><div class="tl-m tl-o">2 · Seifertova 530/24</div><div class="tl-m tl-o">Není mezi nimi – napsat adresu</div>
+    </div></div></div>
+</div>
+<p class="hodnoceni"><b>Plus:</b> nic nenahrává, zadarmo, žádná AI. <b>Minus:</b> u dlouhých ulic a panelových domů zbude víc kandidátů; plochy bytů zjistíme přesně až z výpisu domu (placeného), takže řazení je jen orientační – u bytů slabší než A.</p>
+</section>
+
+<!-- D -->
+<section class="var">
+<h2>D · Kombinace A + C (klient si vybere)</h2>
+<p class="popis">Po odkazu ze Sreality dvě stejně velká tlačítka: „Poslat snímek“ (rychlé a přesné) a „Odpovědět na 2 otázky“ (bez nahrávání). Kdo nechce nic nahrávat, má cestu, a kdo pošle snímek, má nejpřesnější výsledek.</p>
+<div class="radek">
+  <div class="tel"><div class="lista-t"></div><div class="obsah">
+    <div class="bily"><div class="krok-c">Krok 2</div>
+      <div class="karta-m"><h4>Sreality nám adresu neprozradí</h4><p>Vyberte, co je pro vás pohodlnější:</p>
+        <div class="tl-m tl-n">Poslat snímek inzerátu</div>
+        <p style="font-size:.75rem;margin-top:4px">nejpřesnější, 1 snímek obrazovky</p>
+        <div class="tl-m tl-o">Odpovědět na 2 otázky</div>
+        <p style="font-size:.75rem;margin-top:4px">plocha a patro, bez nahrávání</p>
+        <div class="tl-m tl-o" style="border-color:var(--linka);color:var(--tlumene)">Znám adresu</div></div>
+    </div></div></div>
+</div>
+<p class="hodnoceni"><b>Plus:</b> nikoho nenutíme nahrávat. <b>Minus:</b> jedno rozhodnutí navíc; víc kódu (A i C).</p>
+</section>
+
+</div>
+</body>
+</html>
