@@ -1,0 +1,146 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>Návrh: struktura v pozadí úvodu</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styl.css?v=23">
+<style>
+.navrh{position:relative;overflow:hidden} .navrh .uvod{position:relative;z-index:1;background:transparent}
+.navrh{background:var(--navy)}
+.navrh::before{content:"";position:absolute;inset:0;pointer-events:none;
+ -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 30%,#000 60%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 30%,#000 60%)}
+@media (max-width:700px){.navrh::before{-webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.4) 60%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.4) 60%,transparent 100%)}}
+.v-a::before{background:url(pozadi/vrstevnice.svg) right center / cover no-repeat;opacity:.14;}
+.v-b::before{background:url(pozadi/parcely.svg) right center / cover no-repeat;opacity:.13;}
+.v-c::before{background:url(pozadi/ulice.svg) right center / cover no-repeat;opacity:.11;}
+.v-d::before{background:url(pozadi/mestske-casti.svg) right -60px center / auto 130% no-repeat;opacity:.16;}
+.v-e::before{background:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px) 0 0/80px 80px,linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px) 0 0/80px 80px;opacity:.10;}
+.v-f::before{background:none;opacity:0;}
+.navrh-nazev{font:700 1rem Montserrat,sans-serif;text-transform:none;letter-spacing:0;margin:0;padding:14px 16px;background:#f1f2f6;color:#1e2645}
+</style></head><body>
+<p style="padding:16px;font:500 .95rem Montserrat,sans-serif">Návrhy struktury v pozadí úvodní stránky (to-do 11). Data: ČÚZK – ZABAGED a RÚIAN. Vyberte variantu, sílu a umístění doladíme.</p>
+<h2 class="navrh-nazev">Varianta A: Vrstevnice – údolí Vltavy (ZABAGED, ČÚZK)</h2>
+<div class="navrh v-a"><div class="uvod" >
+  <div class="obal">
+    <div>
+      <span class="stitek">Praha a okolí · byty a&nbsp;rodinné domy</span>
+      <h1>Prověření bytu a&nbsp;domu před koupí</h1>
+      <p class="podnadpis">Vložte odkaz na inzerát nebo adresu. <b>Přehled zdarma do 10 vteřin:</b> povodně, hluk, radon, územní plán, okolí a&nbsp;vybavenost. Bez registrace a&nbsp;bez platby.</p>
+      <form class="zadani" action="proverit/" method="get">
+        <label >Odkaz na inzerát nebo adresa</label>
+        <div class="pole">
+          <input  name="q" type="text" required autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Karlická 49, Radotín">
+          <button class="tl svetle" type="submit">Prověřit zdarma</button>
+        </div>
+        <p class="napoveda">Právní stav, majitele a&nbsp;úkoly před podpisem přidá placená Prověrka za 790&nbsp;Kč – až když budete chtít.</p>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<h2 class="navrh-nazev">Varianta B: Hranice parcel – blok na Vinohradech (RÚIAN)</h2>
+<div class="navrh v-b"><div class="uvod" >
+  <div class="obal">
+    <div>
+      <span class="stitek">Praha a okolí · byty a&nbsp;rodinné domy</span>
+      <h1>Prověření bytu a&nbsp;domu před koupí</h1>
+      <p class="podnadpis">Vložte odkaz na inzerát nebo adresu. <b>Přehled zdarma do 10 vteřin:</b> povodně, hluk, radon, územní plán, okolí a&nbsp;vybavenost. Bez registrace a&nbsp;bez platby.</p>
+      <form class="zadani" action="proverit/" method="get">
+        <label >Odkaz na inzerát nebo adresa</label>
+        <div class="pole">
+          <input  name="q" type="text" required autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Karlická 49, Radotín">
+          <button class="tl svetle" type="submit">Prověřit zdarma</button>
+        </div>
+        <p class="napoveda">Právní stav, majitele a&nbsp;úkoly před podpisem přidá placená Prověrka za 790&nbsp;Kč – až když budete chtít.</p>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<h2 class="navrh-nazev">Varianta C: Síť ulic – centrum Prahy (RÚIAN)</h2>
+<div class="navrh v-c"><div class="uvod" >
+  <div class="obal">
+    <div>
+      <span class="stitek">Praha a okolí · byty a&nbsp;rodinné domy</span>
+      <h1>Prověření bytu a&nbsp;domu před koupí</h1>
+      <p class="podnadpis">Vložte odkaz na inzerát nebo adresu. <b>Přehled zdarma do 10 vteřin:</b> povodně, hluk, radon, územní plán, okolí a&nbsp;vybavenost. Bez registrace a&nbsp;bez platby.</p>
+      <form class="zadani" action="proverit/" method="get">
+        <label >Odkaz na inzerát nebo adresa</label>
+        <div class="pole">
+          <input  name="q" type="text" required autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Karlická 49, Radotín">
+          <button class="tl svetle" type="submit">Prověřit zdarma</button>
+        </div>
+        <p class="napoveda">Právní stav, majitele a&nbsp;úkoly před podpisem přidá placená Prověrka za 790&nbsp;Kč – až když budete chtít.</p>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<h2 class="navrh-nazev">Varianta D: Městské části Prahy (velký obrys vpravo)</h2>
+<div class="navrh v-d"><div class="uvod" >
+  <div class="obal">
+    <div>
+      <span class="stitek">Praha a okolí · byty a&nbsp;rodinné domy</span>
+      <h1>Prověření bytu a&nbsp;domu před koupí</h1>
+      <p class="podnadpis">Vložte odkaz na inzerát nebo adresu. <b>Přehled zdarma do 10 vteřin:</b> povodně, hluk, radon, územní plán, okolí a&nbsp;vybavenost. Bez registrace a&nbsp;bez platby.</p>
+      <form class="zadani" action="proverit/" method="get">
+        <label >Odkaz na inzerát nebo adresa</label>
+        <div class="pole">
+          <input  name="q" type="text" required autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Karlická 49, Radotín">
+          <button class="tl svetle" type="submit">Prověřit zdarma</button>
+        </div>
+        <p class="napoveda">Právní stav, majitele a&nbsp;úkoly před podpisem přidá placená Prověrka za 790&nbsp;Kč – až když budete chtít.</p>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<h2 class="navrh-nazev">Varianta E: Katastrální mřížka s křížky (čisté CSS)</h2>
+<div class="navrh v-e"><div class="uvod" >
+  <div class="obal">
+    <div>
+      <span class="stitek">Praha a okolí · byty a&nbsp;rodinné domy</span>
+      <h1>Prověření bytu a&nbsp;domu před koupí</h1>
+      <p class="podnadpis">Vložte odkaz na inzerát nebo adresu. <b>Přehled zdarma do 10 vteřin:</b> povodně, hluk, radon, územní plán, okolí a&nbsp;vybavenost. Bez registrace a&nbsp;bez platby.</p>
+      <form class="zadani" action="proverit/" method="get">
+        <label >Odkaz na inzerát nebo adresa</label>
+        <div class="pole">
+          <input  name="q" type="text" required autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Karlická 49, Radotín">
+          <button class="tl svetle" type="submit">Prověřit zdarma</button>
+        </div>
+        <p class="napoveda">Právní stav, majitele a&nbsp;úkoly před podpisem přidá placená Prověrka za 790&nbsp;Kč – až když budete chtít.</p>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<h2 class="navrh-nazev">Varianta F: Dnes – bez struktury</h2>
+<div class="navrh v-f"><div class="uvod" >
+  <div class="obal">
+    <div>
+      <span class="stitek">Praha a okolí · byty a&nbsp;rodinné domy</span>
+      <h1>Prověření bytu a&nbsp;domu před koupí</h1>
+      <p class="podnadpis">Vložte odkaz na inzerát nebo adresu. <b>Přehled zdarma do 10 vteřin:</b> povodně, hluk, radon, územní plán, okolí a&nbsp;vybavenost. Bez registrace a&nbsp;bez platby.</p>
+      <form class="zadani" action="proverit/" method="get">
+        <label >Odkaz na inzerát nebo adresa</label>
+        <div class="pole">
+          <input  name="q" type="text" required autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Karlická 49, Radotín">
+          <button class="tl svetle" type="submit">Prověřit zdarma</button>
+        </div>
+        <p class="napoveda">Právní stav, majitele a&nbsp;úkoly před podpisem přidá placená Prověrka za 790&nbsp;Kč – až když budete chtít.</p>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+</div>
+</body></html>
